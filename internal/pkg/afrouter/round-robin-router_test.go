@@ -27,7 +27,7 @@ import (
 )
 
 const (
-	ROUND_ROBIN_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/go/voltha.pb"
+	ROUND_ROBIN_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
 )
 
 func init() {
