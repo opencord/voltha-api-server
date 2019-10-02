@@ -21,6 +21,7 @@ import (
 	"github.com/opencord/voltha-api-server/internal/pkg/afrouter"
 	"github.com/opencord/voltha-go/common/log"
 	"github.com/opencord/voltha-go/common/version"
+	_ "github.com/opencord/voltha-protos"
 	"google.golang.org/grpc/grpclog"
 	slog "log"
 	"os"
