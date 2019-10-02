@@ -51,6 +51,11 @@ DOCKER_BUILD_ARGS_LOCAL ?= ${DOCKER_BUILD_ARGS} \
 	--build-arg LOCAL_PYVOLTHA=${LOCAL_PYVOLTHA} \
 	--build-arg LOCAL_PROTOS=${LOCAL_PROTOS}
 
+# Default is GO111MODULE=auto, which will refuse to use go mod if running
+# go less than 1.13.0 and repo is checked out in gopath. For now, force
+# module usage.
+export GO111MODULE=on
+
 .PHONY: rw_core ro_core afrouter afrouterd local-protos local-pyvoltha
 
 # This should to be the first and default target in this Makefile
@@ -80,6 +85,19 @@ ifdef LOCAL_PROTOS
 	mkdir -p vendor/github.com/opencord/voltha-protos/go
 	cp -r ${GOPATH}/src/github.com/opencord/voltha-protos/go/* vendor/github.com/opencord/voltha-protos/go
 endif
+
+GO_MODVENDOR:=$(shell which modvendor)
+
+vendor-protos:
+ifeq (,$(GO_MODVENDOR))
+	go get -u github.com/goware/modvendor
+	@GO_MODVENDOR=$(GOPATH)/bin/modvendor
+endif
+	go mod vendor
+	# Copy voltha.pb, which was not installed by `go mod`
+	# Note: modvendor assumes go.mod is in path from os.Args[0], not cwd. So don't run it with
+	# an absolute path. If we want to use this tool, consider fixing this and submitting a PR.
+	modvendor -copy "**/*.pb" -v
 
 ## Docker targets
 
@@ -156,7 +174,7 @@ ifeq (,$(GOCOVER_COBERTURA))
 	@GOCOVER_COBERTURA=$(GOPATH)/bin/gocover-cobertura
 endif
 	@mkdir -p ./tests/results
-	@go test -v -coverprofile ./tests/results/go-test-coverage.out -covermode count ./... 2>&1 | tee ./tests/results/go-test-results.out ;\
+	@go test -mod=vendor -v -coverprofile ./tests/results/go-test-coverage.out -covermode count ./... 2>&1 | tee ./tests/results/go-test-results.out ;\
 	RETURN=$$? ;\
 	$(GO_JUNIT_REPORT) < ./tests/results/go-test-results.out > ./tests/results/go-test-results.xml ;\
 	$(GOCOVER_COBERTURA) < ./tests/results/go-test-coverage.out > ./tests/results/go-test-coverage.xml ;\
