@@ -51,6 +51,13 @@ DOCKER_BUILD_ARGS_LOCAL ?= ${DOCKER_BUILD_ARGS} \
 	--build-arg LOCAL_PYVOLTHA=${LOCAL_PYVOLTHA} \
 	--build-arg LOCAL_PROTOS=${LOCAL_PROTOS}
 
+# Default is GO111MODULE=auto, which will refuse to use go mod if running
+# go less than 1.13.0 and this repository is checked out in GOPATH. For now,
+# force module usage. This affects commands executed from this Makefile, but
+# not the environment inside the Docker build (which does not build from
+# inside a GOPATH).
+export GO111MODULE=on
+
 .PHONY: rw_core ro_core afrouter afrouterd local-protos local-pyvoltha
 
 # This should to be the first and default target in this Makefile
@@ -68,7 +75,7 @@ help:
 	@echo "lint-dockerfile      : Perform static analysis on Dockerfiles"
 	@echo "lint-style           : Verify code is properly gofmt-ed"
 	@echo "lint-sanity          : Verify that 'go vet' doesn't report any issues"
-	@echo "lint-dep             : Verify the integrity of the 'dep' files"
+	@echo "lint-mod             : Verify the integrity of the 'mod' files"
 	@echo "lint                 : Shorthand for lint-style & lint-sanity"
         @echo "sca               : Runs various SCA through golangci-lint tool"
         @echo "test                 : Generate reports for all go tests"
@@ -77,8 +84,8 @@ help:
 ## Local Development Helpers
 local-protos:
 ifdef LOCAL_PROTOS
-	mkdir -p vendor/github.com/opencord/voltha-protos/go
-	cp -r ${GOPATH}/src/github.com/opencord/voltha-protos/go/* vendor/github.com/opencord/voltha-protos/go
+	mkdir -p vendor/github.com/opencord/voltha-protos
+	cp -r ${GOPATH}/src/github.com/opencord/voltha-protos/voltha.pb vendor/github.com/opencord/voltha-protos/
 endif
 
 ## Docker targets
@@ -126,15 +133,15 @@ endif
 
 lint-sanity:
 	@echo "Running sanity check..."
-	@go vet ./...
+	@go vet -mod=vendor ./...
 	@echo "Sanity check OK"
 
-lint-dep:
+lint-mod:
 	@echo "Running dependency check..."
-	@dep check
+	@go mod verify
 	@echo "Dependency check OK"
 
-lint: lint-style lint-sanity lint-dep lint-dockerfile
+lint: lint-style lint-sanity lint-mod lint-dockerfile
 
 GO_JUNIT_REPORT:=$(shell which go-junit-report)
 GOCOVER_COBERTURA:=$(shell which gocover-cobertura)
@@ -156,7 +163,7 @@ ifeq (,$(GOCOVER_COBERTURA))
 	@GOCOVER_COBERTURA=$(GOPATH)/bin/gocover-cobertura
 endif
 	@mkdir -p ./tests/results
-	@go test -v -coverprofile ./tests/results/go-test-coverage.out -covermode count ./... 2>&1 | tee ./tests/results/go-test-results.out ;\
+	@go test -mod=vendor -v -coverprofile ./tests/results/go-test-coverage.out -covermode count ./... 2>&1 | tee ./tests/results/go-test-results.out ;\
 	RETURN=$$? ;\
 	$(GO_JUNIT_REPORT) < ./tests/results/go-test-results.out > ./tests/results/go-test-results.xml ;\
 	$(GOCOVER_COBERTURA) < ./tests/results/go-test-coverage.out > ./tests/results/go-test-coverage.xml ;\

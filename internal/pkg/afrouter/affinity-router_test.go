@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	AFFINITY_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/go/voltha.pb"
+	AFFINITY_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
 )
 
 // Unit test initialization
