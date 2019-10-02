@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	METHOD_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/go/voltha.pb"
+	METHOD_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
 )
 
 // Unit test initialization
