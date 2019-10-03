@@ -33,8 +33,8 @@ func Test_newMethodDetails(t *testing.T) {
 		// TODO: Add test cases.
 		{"newMethodDetails-1", args{fullMethodName: "/voltha.VolthaService/EnableDevice"},
 			methodDetails{all: "/voltha.VolthaService/EnableDevice", pkg: "voltha", service: "VolthaService", method: "EnableDevice"}},
-		{"newMethodDetails-2", args{fullMethodName:"/voltha.VolthaService/DisableDevice"},
-			methodDetails{all:"/voltha.VolthaService/DisableDevice", pkg:"voltha", service: "VolthaService", method: "DisableDevice"}},
+		{"newMethodDetails-2", args{fullMethodName: "/voltha.VolthaService/DisableDevice"},
+			methodDetails{all: "/voltha.VolthaService/DisableDevice", pkg: "voltha", service: "VolthaService", method: "DisableDevice"}},
 		{"newMethodDetails-3", args{fullMethodName: "/voltha.VolthaService/ListDevicePorts"},
 			methodDetails{all: "/voltha.VolthaService/ListDevicePorts", pkg: "voltha", service: "VolthaService", method: "ListDevicePorts"}},
 	}
