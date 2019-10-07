@@ -62,6 +62,23 @@ func errHandler() {
 }
 
 func cleanExit(err error) {
+
+	//Closing the streaming connections
+	for _, cl := range clusters {
+		for _, bknd := range cl.backends {
+			log.Debugf("Closing backend %s", bknd.name)
+			for streamReq := range bknd.activeRequests {
+				if streamReq.isStreamingResponse || streamReq.isStreamingRequest {
+					connection := streamReq.backend.connections
+					for _, conn := range connection {
+						log.Debugf("Forcefully closing connection %s serving Streaming request/response", conn.name)
+						conn.close()
+					}
+				}
+			}
+		}
+	}
+
 	// Log the shutdown
 	if arProxy != nil {
 		for _, srvr := range arProxy.servers {
@@ -72,15 +89,7 @@ func cleanExit(err error) {
 			}
 		}
 	}
-	for _, cl := range clusters {
-		for _, bknd := range cl.backends {
-			log.Debugf("Closing backend %s", bknd.name)
-			for _, conn := range bknd.connections {
-				log.Debugf("Closing connection %s", conn.name)
-				conn.close()
-			}
-		}
-	}
+
 	doneChan <- err
 	//os.Exit(0)
 }
