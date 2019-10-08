@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84e7df48_4cc16489",
+        "filename": "internal/pkg/afrouter/signals_test.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-08T14:54:09Z",
+      "side": 1,
+      "message": "We can probably omit this as it\u0027s not used.",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 82
+      },
+      "revId": "2ce0dd320baf4482ccb567436ad535991b354480",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
