@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f6f633d_e8d44c03",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-09T14:36:08Z",
+      "side": 1,
+      "message": "Is this needed as you exported the value above",
+      "range": {
+        "startLine": 136,
+        "startChar": 2,
+        "endLine": 136,
+        "endChar": 19
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "defce5d5_b91c05fa",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-09T14:36:08Z",
+      "side": 1,
+      "message": "Is this needed as you exported the value above",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 16
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b15dbca_3e70879c",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-09T14:36:08Z",
+      "side": 1,
+      "message": "The GO11MODULE value is exported, but put in other go commands, but not here. just a consistency issue. i suspect you don\u0027t need it anywhere.",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 4
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf9cb311_8ebf5748",
+        "filename": "docker/Dockerfile.afrouter",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-09T14:36:08Z",
+      "side": 1,
+      "message": "no need to set GO11MODULE value?",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 6
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b0f9f75_ec24d537",
+        "filename": "docker/Dockerfile.afrouterd",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-09T14:36:08Z",
+      "side": 1,
+      "message": "GO11MODULE value?",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 6
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
