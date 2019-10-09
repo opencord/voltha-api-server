@@ -152,6 +152,30 @@
     },
     {
       "key": {
+        "uuid": "164d17de_03cadba8",
+        "filename": "docker/Dockerfile.afrouter",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-10-09T15:33:43Z",
+      "side": 1,
+      "message": "My misunderstanding, -mod flag is correct as-is.",
+      "parentUuid": "4a5922ad_42ccf61b",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 6
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b0f9f75_ec24d537",
         "filename": "docker/Dockerfile.afrouterd",
         "patchSetId": 11
@@ -187,6 +211,30 @@
       "side": 1,
       "message": "-mod\u003dreadonly?",
       "parentUuid": "8b0f9f75_ec24d537",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 6
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ee6f474_d2071cc4",
+        "filename": "docker/Dockerfile.afrouterd",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-10-09T15:33:43Z",
+      "side": 1,
+      "message": "My misunderstanding, -mod flag is correct as-is.",
+      "parentUuid": "f1317060_c0356be0",
       "range": {
         "startLine": 51,
         "startChar": 4,
