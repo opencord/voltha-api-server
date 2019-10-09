@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6b1739ab_ae33409d",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-09T16:33:52Z",
+      "side": 1,
+      "message": "It\u0027s not actually needed inside the Docker builds, since they don\u0027t build from inside the GOPATH, and the default setting of auto works there.",
+      "parentUuid": "87104d35_be2523aa",
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f07d2392_b8501cb6",
         "filename": "Makefile",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2019-10-09T15:24:53Z",
       "side": 1,
       "message": "Is this just a verification?  GO_MODVENDOR seems to be unused.\n\nConsider auto-installing if not already available.",
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a247d52_7b2fab13",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-09T16:33:52Z",
+      "side": 1,
+      "message": "This was leftover from a previous version. Will remove.",
+      "parentUuid": "f07d2392_b8501cb6",
       "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "f0825f77_82ef3577",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-09T16:33:52Z",
+      "side": 1,
+      "message": "Unintended. Will remove.",
+      "parentUuid": "8f6f633d_e8d44c03",
+      "range": {
+        "startLine": 136,
+        "startChar": 2,
+        "endLine": 136,
+        "endChar": 19
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "defce5d5_b91c05fa",
         "filename": "Makefile",
         "patchSetId": 11
@@ -70,6 +130,30 @@
       "writtenOn": "2019-10-09T14:36:08Z",
       "side": 1,
       "message": "Is this needed as you exported the value above",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 16
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6bc3b097_6b5ff68d",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-09T16:33:52Z",
+      "side": 1,
+      "message": "Unintended. Will remove.",
+      "parentUuid": "defce5d5_b91c05fa",
       "range": {
         "startLine": 141,
         "startChar": 2,
