@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "87104d35_be2523aa",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-10-09T15:24:53Z",
+      "side": 1,
+      "message": "This will not propagate into docker builds, needs to be done separately there.\n(Already mentioned by David, but consider adding it directly to the few lines that need it.)",
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f07d2392_b8501cb6",
+        "filename": "Makefile",
+        "patchSetId": 11
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-10-09T15:24:53Z",
+      "side": 1,
+      "message": "Is this just a verification?  GO_MODVENDOR seems to be unused.\n\nConsider auto-installing if not already available.",
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f6f633d_e8d44c03",
         "filename": "Makefile",
         "patchSetId": 11
@@ -94,6 +128,30 @@
     },
     {
       "key": {
+        "uuid": "4a5922ad_42ccf61b",
+        "filename": "docker/Dockerfile.afrouter",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-10-09T15:24:53Z",
+      "side": 1,
+      "message": "irrc, -mod should be \u003dreadonly for ci/cd builds",
+      "parentUuid": "bf9cb311_8ebf5748",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 6
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b0f9f75_ec24d537",
         "filename": "docker/Dockerfile.afrouterd",
         "patchSetId": 11
@@ -105,6 +163,30 @@
       "writtenOn": "2019-10-09T14:36:08Z",
       "side": 1,
       "message": "GO11MODULE value?",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 6
+      },
+      "revId": "5d7758e9ce376d72d9549aa4d3a930a59f669826",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1317060_c0356be0",
+        "filename": "docker/Dockerfile.afrouterd",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-10-09T15:24:53Z",
+      "side": 1,
+      "message": "-mod\u003dreadonly?",
+      "parentUuid": "8b0f9f75_ec24d537",
       "range": {
         "startLine": 51,
         "startChar": 4,
