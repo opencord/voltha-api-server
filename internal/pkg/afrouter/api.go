@@ -75,6 +75,7 @@ func (aa *ArouterApi) getServer(srvr string) (*server, error) {
 	}
 }
 
+// nolint: unused
 func (aa *ArouterApi) getRouter(s *server, clstr string) (Router, error) {
 	for _, pkg := range s.routers {
 		for _, r := range pkg {
