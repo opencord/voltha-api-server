@@ -29,6 +29,10 @@ import (
 	"path"
 )
 
+const (
+	default_InstanceID = "arouter001"
+)
+
 func ParseCmd() (*Configuration, error) {
 	config := &Configuration{}
 	cmdParse := flag.NewFlagSet(path.Base(os.Args[0]), flag.ContinueOnError)
@@ -44,11 +48,19 @@ func ParseCmd() (*Configuration, error) {
 	}
 	//if(!cmdParse.Parsed()) {
 	//}
+
+	if val, have := os.LookupEnv("HOSTNAME"); have {
+		config.InstanceID = val
+	} else {
+		config.InstanceID = default_InstanceID
+	}
+
 	return config, nil
 }
 
 // Configuration file loading and parsing
 type Configuration struct {
+	InstanceID         string
 	ConfigFile         *string
 	LogLevel           *int
 	GrpcLog            *bool

@@ -36,7 +36,7 @@ func main() {
 	}
 
 	// Setup logging
-	if _, err := log.SetDefaultLogger(log.JSON, *conf.LogLevel, nil); err != nil {
+	if _, err := log.SetDefaultLogger(log.JSON, *conf.LogLevel, log.Fields{"instanceId": conf.InstanceID}); err != nil {
 		log.With(log.Fields{"error": err}).Fatal("Cannot setup logging")
 	}
 

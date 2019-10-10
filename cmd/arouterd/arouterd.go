@@ -82,6 +82,8 @@ var (
 	kafkaHost       = getStrEnv("KAFKA_HOST", "kafka")
 	kafkaPort       = getIntEnv("KAFKA_PORT", 0, math.MaxUint16, 9092)
 	kafkaInstanceID = getStrEnv("KAFKA_INSTANCE_ID", "arouterd")
+
+	instanceID = getStrEnv("HOSTNAME", "arouterd001")
 )
 
 func getIntEnv(key string, min, max, defaultValue int) int {
@@ -411,7 +413,7 @@ func main() {
 	}
 
 	// Set up logging
-	if _, err := log.SetDefaultLogger(log.JSON, 0, nil); err != nil {
+	if _, err := log.SetDefaultLogger(log.JSON, 0, log.Fields{"instanceId": instanceID}); err != nil {
 		log.With(log.Fields{"error": err}).Fatal("Cannot setup logging")
 	}
 

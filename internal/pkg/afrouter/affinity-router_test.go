@@ -34,7 +34,7 @@ const (
 // Unit test initialization
 func init() {
 	// Logger must be configured or bad things happen
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, nil)
+	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
 	log.AddPackage(log.JSON, log.WarnLevel, nil)
 }
 
