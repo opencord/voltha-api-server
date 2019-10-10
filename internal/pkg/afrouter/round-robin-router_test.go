@@ -31,7 +31,7 @@ const (
 )
 
 func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, nil)
+	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
 	log.AddPackage(log.JSON, log.WarnLevel, nil)
 }
 

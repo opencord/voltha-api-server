@@ -29,6 +29,10 @@ import (
 	"path"
 )
 
+const (
+	default_InstanceID = "arouter001"
+)
+
 func ParseCmd() (*Configuration, error) {
 	config := &Configuration{}
 	cmdParse := flag.NewFlagSet(path.Base(os.Args[0]), flag.ContinueOnError)
@@ -44,11 +48,25 @@ func ParseCmd() (*Configuration, error) {
 	}
 	//if(!cmdParse.Parsed()) {
 	//}
+
+	containerName := getContainerInfo()
+	if len(containerName) > 0 {
+		config.InstanceID = &containerName
+	} else {
+		containerName = default_InstanceID
+		config.InstanceID = &containerName
+	}
+
 	return config, nil
+}
+
+func getContainerInfo() string {
+	return os.Getenv("HOSTNAME")
 }
 
 // Configuration file loading and parsing
 type Configuration struct {
+	InstanceID         *string
 	ConfigFile         *string
 	LogLevel           *int
 	GrpcLog            *bool
