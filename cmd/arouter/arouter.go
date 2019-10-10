@@ -22,7 +22,7 @@ import (
 	"github.com/opencord/voltha-go/common/log"
 	"github.com/opencord/voltha-go/common/version"
 	"google.golang.org/grpc/grpclog"
-	slog "log"
+	"io/ioutil"
 	"os"
 )
 
@@ -57,8 +57,7 @@ func main() {
 
 	// Enable grpc logging
 	if *conf.GrpcLog {
-		grpclog.SetLogger(slog.New(os.Stderr, "grpc: ", slog.LstdFlags))
-		//grpclog.SetLoggerV2(lgr)
+		grpclog.SetLoggerV2(grpclog.NewLoggerV2(os.Stderr, ioutil.Discard, ioutil.Discard))
 	}
 
 	// Install the signal and error handlers.
