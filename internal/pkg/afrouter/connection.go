@@ -41,7 +41,7 @@ func (cn *connection) connect() {
 		// Check back later to confirm and increase the connection count.
 
 		var err error
-		conn, err := grpc.Dial(cn.addr+":"+cn.port, grpc.WithCodec(Codec()), grpc.WithInsecure(), grpc.WithBackoffMaxDelay(time.Second*15))
+		conn, err := grpc.Dial(cn.addr+":"+cn.port, grpc.WithDefaultCallOptions(grpc.ForceCodec(Codec())), grpc.WithInsecure(), grpc.WithBackoffMaxDelay(time.Second*15))
 		if err != nil {
 			log.Fatalf("Dialing connection %v:%v", cn, err)
 		}

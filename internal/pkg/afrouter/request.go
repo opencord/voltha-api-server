@@ -111,9 +111,9 @@ func (r *request) forwardResponseStream(connName string, stream grpc.ClientStrea
 					if err = r.sendResponseFrame(stream, frame); err != nil {
 						break
 					}
-				} else { // !activeStream && !r.isStreamingRequest && !r.isStreamingResponse
-					// just read & discard until the stream dies
 				}
+				// !activeStream && !r.isStreamingRequest && !r.isStreamingResponse
+				// just read & discard until the stream dies
 			}
 		}
 	}

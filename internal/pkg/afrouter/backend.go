@@ -38,7 +38,6 @@ type backend struct {
 	name              string
 	beType            backendType
 	activeAssociation association
-	connFailCallback  func(string, *backend) bool
 	connections       map[string]*connection
 	openConns         map[*connection]*grpc.ClientConn
 	activeRequests    map[*request]struct{}
@@ -286,10 +285,4 @@ func (be *backend) connectAll() {
 	for _, cn := range be.connections {
 		go cn.connect()
 	}
-}
-
-// Set a callback for connection failure notification
-// This is currently not used.
-func (be *backend) setConnFailCallback(cb func(string, *backend) bool) {
-	be.connFailCallback = cb
 }
