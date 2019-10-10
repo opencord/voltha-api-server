@@ -18,15 +18,9 @@ package afrouter
 
 import (
 	"fmt"
-	"github.com/opencord/voltha-go/common/log"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
-
-func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 func MakeServerTestConfig(numBackends int, numConnections int) *ServerConfig {
 
@@ -51,6 +45,9 @@ func MakeServerTestConfig(numBackends int, numConnections int) *ServerConfig {
 
 		backends = append(backends, backendConfig)
 	}
+
+	// TODO: Do we need the above backend array for future tests? SCA says it is unused.
+	_ = backends
 
 	routerPackageConfig := RouterPackage{
 		Router:  `json:"router"`,
