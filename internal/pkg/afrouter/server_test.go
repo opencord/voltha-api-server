@@ -18,15 +18,9 @@ package afrouter
 
 import (
 	"fmt"
-	"github.com/opencord/voltha-go/common/log"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
-
-func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 func MakeServerTestConfig(numBackends int, numConnections int) *ServerConfig {
 
