@@ -66,7 +66,10 @@ func (r *request) catchupRequestStreamThenForwardResponseStream(connName string,
 		}
 	}
 	if r.sendClosed {
-		stream.CloseSend()
+		err := stream.CloseSend()
+		if err != nil {
+			log.Errorf("%v", err)
+		}
 	}
 
 	r.mutex.Unlock()
@@ -111,9 +114,9 @@ func (r *request) forwardResponseStream(connName string, stream grpc.ClientStrea
 					if err = r.sendResponseFrame(stream, frame); err != nil {
 						break
 					}
-				} else { // !activeStream && !r.isStreamingRequest && !r.isStreamingResponse
-					// just read & discard until the stream dies
 				}
+				// !activeStream && !r.isStreamingRequest && !r.isStreamingResponse
+				// just read & discard until the stream dies
 			}
 		}
 	}
@@ -264,7 +267,10 @@ func (r *request) forwardRequestStream(src grpc.ServerStream) error {
 	log.Debug("Closing southbound streams")
 	r.sendClosed = true
 	for _, stream := range r.streams {
-		stream.CloseSend()
+		err := stream.CloseSend()
+		if err != nil {
+			log.Errorf("%v", err)
+		}
 	}
 	r.mutex.Unlock()
 

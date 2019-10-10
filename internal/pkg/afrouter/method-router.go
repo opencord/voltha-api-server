@@ -80,7 +80,7 @@ func newMethodRouter(config *RouterConfig) (Router, error) {
 	}
 
 	if len(config.Routes) == 0 {
-		return nil, errors.New(fmt.Sprintf("Router %s must have at least one route", config.Name))
+		return nil, fmt.Errorf("Router %s must have at least one route", config.Name)
 	}
 	for _, rtv := range config.Routes {
 		//log.Debugf("Processing route: %v",rtv)
@@ -99,7 +99,7 @@ func newMethodRouter(config *RouterConfig) (Router, error) {
 		}
 		switch len(rtv.Methods) {
 		case 0:
-			return nil, errors.New(fmt.Sprintf("Route for router %s must have at least one method", config.Name))
+			return nil, fmt.Errorf("Route for router %s must have at least one method", config.Name)
 		case 1:
 			if rtv.Methods[0] == "*" {
 				return r, nil
@@ -108,8 +108,8 @@ func newMethodRouter(config *RouterConfig) (Router, error) {
 				if _, ok := mr.methodRouter[idx1][rtv.Methods[0]]; !ok {
 					mr.methodRouter[idx1][rtv.Methods[0]] = r
 				} else {
-					err := errors.New(fmt.Sprintf("Attempt to define method %s for 2 routes: %s & %s", rtv.Methods[0],
-						r.Name(), mr.methodRouter[idx1][rtv.Methods[0]].Name()))
+					err := fmt.Errorf("Attempt to define method %s for 2 routes: %s & %s", rtv.Methods[0],
+						r.Name(), mr.methodRouter[idx1][rtv.Methods[0]].Name())
 					log.Error(err)
 					return mr, err
 				}
@@ -121,7 +121,7 @@ func newMethodRouter(config *RouterConfig) (Router, error) {
 					log.Debugf("Setting router '%s' for method '%s'", r.Name(), m)
 					mr.methodRouter[idx1][m] = r
 				} else {
-					err := errors.New(fmt.Sprintf("Attempt to define method %s for 2 routes: %s & %s", m, r.Name(), mr.methodRouter[idx1][m].Name()))
+					err := fmt.Errorf("Attempt to define method %s for 2 routes: %s & %s", m, r.Name(), mr.methodRouter[idx1][m].Name())
 					log.Error(err)
 					return mr, err
 				}
@@ -198,7 +198,7 @@ func (mr MethodRouter) BackendCluster(mthd string, metaKey string) (*cluster, er
 	if r, ok := mr.methodRouter[metaKey][mthd]; ok {
 		return r.BackendCluster(mthd, metaKey)
 	}
-	err := errors.New(fmt.Sprintf("No backend cluster exists for method '%s' using meta key '%s'", mthd, metaKey))
+	err := fmt.Errorf("No backend cluster exists for method '%s' using meta key '%s'", mthd, metaKey)
 	log.Error(err)
 	return nil, err
 }
