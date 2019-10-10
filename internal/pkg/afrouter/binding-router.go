@@ -64,7 +64,7 @@ func (br BindingRouter) GetMetaKeyVal(serverStream grpc.ServerStream) (string, s
 	}
 
 	// Determine if one of the method routing keys exists in the metadata
-	if _, ok := md[br.bindingField]; ok == true {
+	if _, ok := md[br.bindingField]; ok {
 		rtrnV = md[br.bindingField][0]
 		rtrnK = br.bindingField
 	}
@@ -84,19 +84,19 @@ func (br BindingRouter) Route(sel interface{}) (*backend, *connection) {
 	var err error
 	switch sl := sel.(type) {
 	case *requestFrame:
-		if b, ok := br.bindings[sl.metaVal]; ok == true { // binding exists, just return it
+		if b, ok := br.bindings[sl.metaVal]; ok { // binding exists, just return it
 			return b, nil
 		} else { // establish a new binding or error.
 			if sl.metaVal != "" {
-				err = errors.New(fmt.Sprintf("Attempt to route on non-existent metadata value '%s' in key '%s'",
-					sl.metaVal, sl.metaKey))
+				err = fmt.Errorf("Attempt to route on non-existent metadata value '%s' in key '%s'",
+					sl.metaVal, sl.metaKey)
 				log.Error(err)
 				sl.err = err
 				return nil, nil
 			}
 			if sl.methodInfo.method != br.bindingMethod {
-				err = errors.New(fmt.Sprintf("Binding must occur with method %s but attempted with method %s",
-					br.bindingMethod, sl.methodInfo.method))
+				err = fmt.Errorf("Binding must occur with method %s but attempted with method %s",
+					br.bindingMethod, sl.methodInfo.method)
 				log.Error(err)
 				sl.err = err
 				return nil, nil
@@ -120,7 +120,7 @@ func (br BindingRouter) Route(sel interface{}) (*backend, *connection) {
 
 func newBindingRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) {
 	var rtrn_err = false
-	var err error = nil
+	var err error
 	log.Debugf("Creating binding router %s", config.Name)
 	// A name must exist
 	if config.Name == "" {
@@ -154,7 +154,6 @@ func newBindingRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) 
 	// so the router will route all methods based on the
 	// routing_field. This needs to be done.
 	var bptr *backend
-	bptr = nil
 	br := BindingRouter{
 		name:        config.Name,
 		grpcService: rconf.ProtoService,
@@ -193,8 +192,8 @@ func newBindingRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) 
 	}
 
 	// Create the backend cluster or link to an existing one
-	ok := true
-	if br.beCluster, ok = clusters[config.backendCluster.Name]; ok == false {
+	var ok bool
+	if br.beCluster, ok = clusters[config.backendCluster.Name]; !ok {
 		if br.beCluster, err = newBackendCluster(config.backendCluster); err != nil {
 			log.Errorf("Could not create a backend for router %s", config.Name)
 			rtrn_err = true
@@ -204,7 +203,7 @@ func newBindingRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) 
 	// HERE HERE HERE
 
 	if rtrn_err {
-		return br, errors.New(fmt.Sprintf("Failed to create a new router '%s'", br.name))
+		return br, fmt.Errorf("Failed to create a new router '%s'", br.name)
 	}
 
 	return br, nil

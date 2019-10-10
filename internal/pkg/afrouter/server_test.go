@@ -17,40 +17,12 @@
 package afrouter
 
 import (
-	"fmt"
-	"github.com/opencord/voltha-go/common/log"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
-
-func MakeServerTestConfig(numBackends int, numConnections int) *ServerConfig {
-
+func MakeServerTestConfig() *ServerConfig {
 	var routerPackage []RouterPackage
-	var backends []BackendConfig
-	for backendIndex := 0; backendIndex < numBackends; backendIndex++ {
-		var connections []ConnectionConfig
-		for connectionIndex := 0; connectionIndex < numConnections; connectionIndex++ {
-			connectionConfig := ConnectionConfig{
-				Name: fmt.Sprintf("ro_vcore%d%d", backendIndex, connectionIndex+1),
-				Addr: "foo",
-				Port: "123",
-			}
-			connections = append(connections, connectionConfig)
-		}
-
-		backendConfig := BackendConfig{
-			Name:        fmt.Sprintf("ro_vcore%d", backendIndex),
-			Type:        BackendSingleServer,
-			Connections: connections,
-		}
-
-		backends = append(backends, backendConfig)
-	}
 
 	routerPackageConfig := RouterPackage{
 		Router:  `json:"router"`,
@@ -73,7 +45,7 @@ func MakeServerTestConfig(numBackends int, numConnections int) *ServerConfig {
 // Test creation of a new Server
 func TestServerInit(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig(1, 1)
+	serverConfig := MakeServerTestConfig()
 
 	serv, err := newServer(serverConfig)
 
@@ -85,7 +57,7 @@ func TestServerInit(t *testing.T) {
 // Test creation of a new Server, error in Addr
 func TestServerInitWrongAddr(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig(1, 1)
+	serverConfig := MakeServerTestConfig()
 	serverConfig.Addr = "127.300.1.1"
 
 	serv, err := newServer(serverConfig)
@@ -97,7 +69,7 @@ func TestServerInitWrongAddr(t *testing.T) {
 // Test creation of a new Server, error in Port
 func TestServerInitWrongPort(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig(1, 1)
+	serverConfig := MakeServerTestConfig()
 	serverConfig.Port = 23
 
 	serv, err := newServer(serverConfig)
@@ -109,7 +81,7 @@ func TestServerInitWrongPort(t *testing.T) {
 // Test creation of a new Server, error in Name
 func TestServerInitNoName(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig(1, 1)
+	serverConfig := MakeServerTestConfig()
 	serverConfig.Name = ""
 
 	serv, err := newServer(serverConfig)
@@ -121,7 +93,7 @@ func TestServerInitNoName(t *testing.T) {
 // Test creation of a new Server, error in Type
 func TestServerInitWrongType(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig(1, 1)
+	serverConfig := MakeServerTestConfig()
 	serverConfig.Type = "xxx"
 
 	serv, err := newServer(serverConfig)
@@ -133,7 +105,7 @@ func TestServerInitWrongType(t *testing.T) {
 // Test creation of a new Server, error in Router
 func TestServerInitNoRouter(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig(1, 1)
+	serverConfig := MakeServerTestConfig()
 	serverConfig.routers = nil
 
 	serv, err := newServer(serverConfig)
@@ -145,7 +117,7 @@ func TestServerInitNoRouter(t *testing.T) {
 // Test creation of a new Server
 func TestServerInitHandler(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig(1, 1)
+	serverConfig := MakeServerTestConfig()
 	serverConfig.Port = 55556
 
 	serv, err := newServer(serverConfig)
