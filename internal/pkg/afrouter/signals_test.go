@@ -21,15 +21,17 @@
 package afrouter
 
 import (
-	"github.com/opencord/voltha-go/common/log"
+	//	"github.com/opencord/voltha-go/common/log"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
+/*
 func init() {
 	log.SetDefaultLogger(log.JSON, log.DebugLevel, nil)
 	log.AddPackage(log.JSON, log.WarnLevel, nil)
 }
+*/
 
 // Test for function signalHandler and cleanExit
 func TestSignalsInitExitHandler(t *testing.T) {
