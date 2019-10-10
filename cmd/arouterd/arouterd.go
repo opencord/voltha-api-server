@@ -48,12 +48,11 @@ import (
 )
 
 type volthaPod struct {
-	name       string
-	ipAddr     string
-	node       string
-	devIds     map[string]struct{}
-	backend    string
-	connection string
+	name    string
+	ipAddr  string
+	node    string
+	devIds  map[string]struct{}
+	backend string
 }
 
 type Configuration struct {

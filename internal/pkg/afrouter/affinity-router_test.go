@@ -19,24 +19,12 @@ package afrouter
 import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"github.com/opencord/voltha-go/common/log"
 	common_pb "github.com/opencord/voltha-protos/go/common"
 	voltha_pb "github.com/opencord/voltha-protos/go/voltha"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"testing"
 )
-
-const (
-	AFFINITY_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
-)
-
-// Unit test initialization
-func init() {
-	// Logger must be configured or bad things happen
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 // Build an affinity router configuration
 func MakeAffinityTestConfig(numBackends int, numConnections int) (*RouteConfig, *RouterConfig) {
@@ -83,7 +71,7 @@ func MakeAffinityTestConfig(numBackends int, numConnections int) (*RouteConfig, 
 		ProtoService: "VolthaService",
 		ProtoPackage: "voltha",
 		Routes:       []RouteConfig{routeConfig},
-		ProtoFile:    AFFINITY_ROUTER_PROTOFILE,
+		ProtoFile:    TEST_PROTOFILE,
 	}
 	return &routeConfig, &routerConfig
 }
@@ -384,20 +372,24 @@ func TestAffinityRouterDecodeProtoField(t *testing.T) {
 	 */
 
 	s, err := aRouter.decodeProtoField(portData, 1) // field 1 is PortNo
+	assert.Nil(t, err)
 	assert.Equal(t, "123", s)
 
 	// Test VOL-1882, skipping of varint field. Note: May cause infinite loop if not fixed!
 	s, err = aRouter.decodeProtoField(portData, 2) // field 2 is Label
+	assert.Nil(t, err)
 	assert.Equal(t, "testlabel", s)
 
 	s, err = aRouter.decodeProtoField(portData, 3) // field 3 is PortType
+	assert.Nil(t, err)
 	assert.Equal(t, "3", s)
 
 	s, err = aRouter.decodeProtoField(portData, 7) // field 7 is DeviceId
+	assert.Nil(t, err)
 	assert.Equal(t, "5678", s)
 
 	// TODO: Seems like an int64 ought to be allowed...
-	s, err = aRouter.decodeProtoField(portData, 9) // field 7 is RxPackets
+	_, err = aRouter.decodeProtoField(portData, 9) // field 7 is RxPackets
 	assert.EqualError(t, err, "Only integer and string route selectors are permitted")
 }
 
