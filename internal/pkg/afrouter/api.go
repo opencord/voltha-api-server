@@ -68,13 +68,14 @@ func newApi(config *ApiConfig, ar *ArouterProxy) (*ArouterApi, error) {
 
 func (aa *ArouterApi) getServer(srvr string) (*server, error) {
 	if s, ok := aa.ar.servers[srvr]; !ok {
-		err := errors.New(fmt.Sprintf("Server '%s' doesn't exist", srvr))
+		err := fmt.Errorf("Server '%s' doesn't exist", srvr)
 		return nil, err
 	} else {
 		return s, nil
 	}
 }
 
+// nolint: unused
 func (aa *ArouterApi) getRouter(s *server, clstr string) (Router, error) {
 	for _, pkg := range s.routers {
 		for _, r := range pkg {
@@ -83,7 +84,7 @@ func (aa *ArouterApi) getRouter(s *server, clstr string) (Router, error) {
 			}
 		}
 	}
-	err := errors.New(fmt.Sprintf("Cluster '%s' doesn't exist", clstr))
+	err := fmt.Errorf("Cluster '%s' doesn't exist", clstr)
 	return nil, err
 }
 
@@ -95,7 +96,7 @@ func (aa *ArouterApi) getCluster(s *server, clstr string) (*cluster, error) {
 			}
 		}
 	}
-	err := errors.New(fmt.Sprintf("Cluster '%s' doesn't exist", clstr))
+	err := fmt.Errorf("Cluster '%s' doesn't exist", clstr)
 	return nil, err
 }
 
@@ -105,14 +106,14 @@ func (aa *ArouterApi) getBackend(c *cluster, bknd string) (*backend, error) {
 			return b, nil
 		}
 	}
-	err := errors.New(fmt.Sprintf("Backend '%s' doesn't exist in cluster %s",
-		bknd, c.name))
+	err := fmt.Errorf("Backend '%s' doesn't exist in cluster %s",
+		bknd, c.name)
 	return nil, err
 }
 
 func (aa *ArouterApi) getConnection(b *backend, con string) (*connection, error) {
 	if c, ok := b.connections[con]; !ok {
-		err := errors.New(fmt.Sprintf("Connection '%s' doesn't exist", con))
+		err := fmt.Errorf("Connection '%s' doesn't exist", con)
 		return nil, err
 	} else {
 		return c, nil
@@ -176,7 +177,7 @@ func (aa ArouterApi) SetConnection(ctx context.Context, in *pb.Conn) (*pb.Result
 
 	aap := &aa
 	if s, err = (aap).getServer(in.Server); err != nil {
-		err := errors.New(fmt.Sprintf("Server '%s' doesn't exist", in.Server))
+		err := fmt.Errorf("Server '%s' doesn't exist", in.Server)
 		log.Error(err)
 		return &pb.Result{Success: false, Error: err.Error()}, err
 	}

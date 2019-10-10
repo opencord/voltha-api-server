@@ -19,24 +19,12 @@ package afrouter
 import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"github.com/opencord/voltha-go/common/log"
 	common_pb "github.com/opencord/voltha-protos/go/common"
 	voltha_pb "github.com/opencord/voltha-protos/go/voltha"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"testing"
 )
-
-const (
-	AFFINITY_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/go/voltha.pb"
-)
-
-// Unit test initialization
-func init() {
-	// Logger must be configured or bad things happen
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, nil)
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 // Build an affinity router configuration
 func MakeAffinityTestConfig(numBackends int, numConnections int) (*RouteConfig, *RouterConfig) {
@@ -83,7 +71,7 @@ func MakeAffinityTestConfig(numBackends int, numConnections int) (*RouteConfig, 
 		ProtoService: "VolthaService",
 		ProtoPackage: "voltha",
 		Routes:       []RouteConfig{routeConfig},
-		ProtoFile:    AFFINITY_ROUTER_PROTOFILE,
+		ProtoFile:    TEST_PROTOFILE,
 	}
 	return &routeConfig, &routerConfig
 }
@@ -397,7 +385,7 @@ func TestAffinityRouterDecodeProtoField(t *testing.T) {
 	assert.Equal(t, "5678", s)
 
 	// TODO: Seems like an int64 ought to be allowed...
-	s, err = aRouter.decodeProtoField(portData, 9) // field 7 is RxPackets
+	_, err = aRouter.decodeProtoField(portData, 9) // field 7 is RxPackets
 	assert.EqualError(t, err, "Only integer and string route selectors are permitted")
 }
 

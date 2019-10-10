@@ -17,22 +17,34 @@
 package afrouter
 
 import (
-	"fmt"
 	"github.com/golang/protobuf/proto"
 	"github.com/opencord/voltha-go/common/log"
-	"google.golang.org/grpc"
+	"google.golang.org/grpc/encoding"
 )
 
-func Codec() grpc.Codec {
+/*
+ * encoding.Codec renamed grpc.Codec's String() method to Name()
+ *
+ * grpc.ForceCodec() expects an encoding.Codec, alternative use of grpc.Codec is deprecated
+ * grpc.CustomCodec() expects a grpc.Codec, has no mechanism to use encoding.Codec
+ *
+ * Make an interface that supports them both.
+ */
+type hybridCodec interface {
+	encoding.Codec
+	String() string
+}
+
+func Codec() hybridCodec {
 	return CodecWithParent(&protoCodec{})
 }
 
-func CodecWithParent(parent grpc.Codec) grpc.Codec {
+func CodecWithParent(parent encoding.Codec) hybridCodec {
 	return &transparentRoutingCodec{parent}
 }
 
 type transparentRoutingCodec struct {
-	parentCodec grpc.Codec
+	parentCodec encoding.Codec
 }
 
 // responseFrame is a frame being "returned" to whomever established the connection
@@ -93,8 +105,12 @@ func (cdc *transparentRoutingCodec) Unmarshal(data []byte, v interface{}) error 
 	}
 }
 
+func (cdc *transparentRoutingCodec) Name() string {
+	return cdc.parentCodec.Name()
+}
+
 func (cdc *transparentRoutingCodec) String() string {
-	return fmt.Sprintf("%s", cdc.parentCodec.String())
+	return cdc.Name()
 }
 
 // protoCodec is a Codec implementation with protobuf. It is the default Codec for gRPC.
@@ -108,6 +124,6 @@ func (protoCodec) Unmarshal(data []byte, v interface{}) error {
 	return proto.Unmarshal(data, v.(proto.Message))
 }
 
-func (protoCodec) String() string {
+func (protoCodec) Name() string {
 	return "protoCodec"
 }

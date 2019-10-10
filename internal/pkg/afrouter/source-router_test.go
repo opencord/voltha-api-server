@@ -18,20 +18,11 @@ package afrouter
 
 import (
 	"github.com/golang/protobuf/proto"
-	"github.com/opencord/voltha-go/common/log"
+	//	"github.com/opencord/voltha-go/common/log"
 	common_pb "github.com/opencord/voltha-protos/go/common"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
-
-const (
-	SOURCE_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/go/voltha.pb"
-)
-
-func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, nil)
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 func MakeSourceRouterTestConfig() (*RouteConfig, *RouterConfig) {
 	connectionConfig := ConnectionConfig{
@@ -65,7 +56,7 @@ func MakeSourceRouterTestConfig() (*RouteConfig, *RouterConfig) {
 		ProtoService: "VolthaService",
 		ProtoPackage: "voltha",
 		Routes:       []RouteConfig{routeConfig},
-		ProtoFile:    SOURCE_ROUTER_PROTOFILE,
+		ProtoFile:    TEST_PROTOFILE,
 	}
 	return &routeConfig, &routerConfig
 }

@@ -17,7 +17,6 @@
 package afrouter
 
 import (
-	"errors"
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"github.com/opencord/voltha-go/common/log"
@@ -75,8 +74,7 @@ func newAffinityRouter(rconf *RouterConfig, config *RouteConfig) (Router, error)
 	// so the router will route all methods based on the
 	// routing_field. This needs to be added so that methods
 	// can have different routing fields.
-	var bptr *backend
-	bptr = nil
+	var bptr *backend = nil
 	dr := AffinityRouter{
 		name:               config.Name,
 		grpcService:        rconf.ProtoService,
@@ -166,7 +164,7 @@ func newAffinityRouter(rconf *RouterConfig, config *RouteConfig) (Router, error)
 	}
 
 	if rtrn_err {
-		return dr, errors.New(fmt.Sprintf("Failed to create a new router '%s'", dr.name))
+		return dr, fmt.Errorf("Failed to create a new router '%s'", dr.name)
 	}
 
 	return dr, nil
@@ -259,7 +257,7 @@ func (ar AffinityRouter) decodeProtoField(payload []byte, fieldId byte) (string,
 					return "", e
 				}
 			default:
-				err := errors.New(fmt.Sprintf("Only integer and string route selectors are permitted"))
+				err := fmt.Errorf("Only integer and string route selectors are permitted")
 				log.Error(err)
 				return "", err
 			}
@@ -350,14 +348,14 @@ func (ar AffinityRouter) ReplyHandler(sel interface{}) error {
 				}
 				return nil
 			} else {
-				err := errors.New(fmt.Sprintf("Failed to decode reply field %d for method %s", fld, sl.method))
+				err := fmt.Errorf("Failed to decode reply field %d for method %s", fld, sl.method)
 				log.Error(err)
 				return err
 			}
 		}
 		return nil
 	default:
-		err := errors.New(fmt.Sprintf("Internal: invalid data type in ReplyHander call %v", sl))
+		err := fmt.Errorf("Internal: invalid data type in ReplyHander call %v", sl)
 		log.Error(err)
 		return err
 	}
@@ -368,8 +366,8 @@ func (ar AffinityRouter) setAffinity(key string, be *backend) error {
 		ar.affinity[key] = be
 		log.Debugf("New affinity set to backend %s for key %s", be.name, key)
 	} else if be2 != be {
-		err := errors.New(fmt.Sprintf("Attempting multiple sets of affinity for key %s to backend %s from %s on router %s",
-			key, be.name, ar.affinity[key].name, ar.name))
+		err := fmt.Errorf("Attempting multiple sets of affinity for key %s to backend %s from %s on router %s",
+			key, be.name, ar.affinity[key].name, ar.name)
 		log.Error(err)
 		return err
 	}
