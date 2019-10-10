@@ -43,16 +43,14 @@ import (
 )
 
 type SourceRouter struct {
-	name string
-	//association     associationType
-	routingField string
-	grpcService  string
-	methodMap    map[string]byte
-	cluster      *cluster
+	name        string
+	grpcService string
+	methodMap   map[string]byte
+	cluster     *cluster
 }
 
 func newSourceRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) {
-	var err error = nil
+	var err error
 	var rtrn_err = false
 	var pkg_re = regexp.MustCompile(`^(\.[^.]+\.)(.+)$`)
 	// Validate the configuration
@@ -142,7 +140,7 @@ func newSourceRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) {
 
 	// We need to pick a cluster, because server will call cluster.handler. The choice we make doesn't
 	// matter, as we can return a different cluster from Route().
-	ok := true
+	var ok bool
 	if dr.cluster, ok = clusters[config.backendCluster.Name]; !ok {
 		if dr.cluster, err = newBackendCluster(config.backendCluster); err != nil {
 			log.Errorf("Could not create a backend for router %s", config.Name)
@@ -151,7 +149,7 @@ func newSourceRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) {
 	}
 
 	if rtrn_err {
-		return dr, errors.New(fmt.Sprintf("Failed to create a new router '%s'", dr.name))
+		return dr, fmt.Errorf("Failed to create a new router '%s'", dr.name)
 	}
 
 	return dr, nil
@@ -229,7 +227,7 @@ func (ar SourceRouter) decodeProtoField(payload []byte, fieldId byte) (string, e
 					return "", e
 				}
 			default:
-				err := errors.New(fmt.Sprintf("Only integer and string route selectors are permitted"))
+				err := errors.New("Only integer and string route selectors are permitted")
 				log.Error(err)
 				return "", err
 			}

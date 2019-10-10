@@ -18,20 +18,10 @@ package afrouter
 
 import (
 	"github.com/golang/protobuf/proto"
-	"github.com/opencord/voltha-go/common/log"
 	common_pb "github.com/opencord/voltha-protos/go/common"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
-
-const (
-	SOURCE_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
-)
-
-func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 func MakeSourceRouterTestConfig() (*RouteConfig, *RouterConfig) {
 	connectionConfig := ConnectionConfig{
@@ -65,7 +55,7 @@ func MakeSourceRouterTestConfig() (*RouteConfig, *RouterConfig) {
 		ProtoService: "VolthaService",
 		ProtoPackage: "voltha",
 		Routes:       []RouteConfig{routeConfig},
-		ProtoFile:    SOURCE_ROUTER_PROTOFILE,
+		ProtoFile:    TEST_PROTOFILE,
 	}
 	return &routeConfig, &routerConfig
 }
@@ -105,9 +95,11 @@ func TestSourceRouterDecodeProtoField(t *testing.T) {
 	assert.Nil(t, err)
 
 	s, err := sourceRouter.decodeProtoField(loggingData, 2) // field 2 is package_name
+	assert.Nil(t, err)
 	assert.Equal(t, s, "default")
 
 	s, err = sourceRouter.decodeProtoField(loggingData, 3) // field 2 is component_name
+	assert.Nil(t, err)
 	assert.Equal(t, s, "ro_vcore0.ro_vcore01")
 }
 

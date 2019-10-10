@@ -26,6 +26,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 	"net/url"
 	"strconv"
 	"strings"
@@ -38,7 +39,6 @@ type backend struct {
 	name              string
 	beType            backendType
 	activeAssociation association
-	connFailCallback  func(string, *backend) bool
 	connections       map[string]*connection
 	openConns         map[*connection]*grpc.ClientConn
 	activeRequests    map[*request]struct{}
@@ -152,7 +152,7 @@ func (be *backend) handler(srv interface{}, serverStream grpc.ServerStream, nf *
 	log.Debug("Starting request stream forwarding")
 	if s2cErr := request.forwardRequestStream(serverStream); s2cErr != nil {
 		// exit with an error to the stack
-		return grpc.Errorf(codes.Internal, "failed proxying s2c: %v", s2cErr)
+		return status.Errorf(codes.Internal, "failed proxying s2c: %v", s2cErr)
 	}
 	// wait for response stream to complete
 	return <-request.responseErrChan
@@ -286,10 +286,4 @@ func (be *backend) connectAll() {
 	for _, cn := range be.connections {
 		go cn.connect()
 	}
-}
-
-// Set a callback for connection failure notification
-// This is currently not used.
-func (be *backend) setConnFailCallback(cb func(string, *backend) bool) {
-	be.connFailCallback = cb
 }

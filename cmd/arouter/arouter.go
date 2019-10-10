@@ -23,7 +23,7 @@ import (
 	"github.com/opencord/voltha-go/common/version"
 	_ "github.com/opencord/voltha-protos"
 	"google.golang.org/grpc/grpclog"
-	slog "log"
+	"io/ioutil"
 	"os"
 )
 
@@ -40,7 +40,14 @@ func main() {
 		log.With(log.Fields{"error": err}).Fatal("Cannot setup logging")
 	}
 
-	defer log.CleanUp()
+	defer func() {
+		err := log.CleanUp()
+		if err != nil {
+			// Let's not use the logger to print the error message, since the
+			// logger could be in a bad state.
+			fmt.Fprintf(os.Stderr, "Failed to cleanup logger: %v", err)
+		}
+	}()
 
 	if *conf.DisplayVersionOnly {
 		fmt.Println("VOLTHA API Server (afrouter)")
@@ -58,12 +65,15 @@ func main() {
 
 	// Enable grpc logging
 	if *conf.GrpcLog {
-		grpclog.SetLogger(slog.New(os.Stderr, "grpc: ", slog.LstdFlags))
-		//grpclog.SetLoggerV2(lgr)
+		grpclog.SetLoggerV2(grpclog.NewLoggerV2(os.Stderr, ioutil.Discard, ioutil.Discard))
 	}
 
 	// Install the signal and error handlers.
-	afrouter.InitExitHandler()
+	err = afrouter.InitExitHandler()
+	if err != nil {
+		log.Errorf("Failed to initialize exit handler, exiting: %v", err)
+		return
+	}
 
 	// Create the affinity router proxy...
 	if ap, err := afrouter.NewArouterProxy(conf); err != nil {

@@ -17,15 +17,9 @@
 package afrouter
 
 import (
-	"github.com/opencord/voltha-go/common/log"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
-
-func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 func TestRouter(t *testing.T) {
 	routeConfig, routerConfig := MakeRoundRobinTestConfig(1, 1)

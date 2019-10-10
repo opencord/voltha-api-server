@@ -38,7 +38,7 @@ type cluster struct {
 // level. All backends should really be of the same type.
 // Create a new backend cluster
 func newBackendCluster(conf *BackendClusterConfig) (*cluster, error) {
-	var err error = nil
+	var err error
 	var rtrn_err = false
 	var be *backend
 	log.Debugf("Creating a backend cluster with %v", conf)

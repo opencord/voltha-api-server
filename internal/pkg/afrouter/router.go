@@ -17,7 +17,6 @@
 package afrouter
 
 import (
-	"errors"
 	"fmt"
 	"google.golang.org/grpc"
 )
@@ -75,6 +74,6 @@ func newSubRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) {
 		}
 		return r, err
 	default:
-		return nil, errors.New(fmt.Sprintf("Internal error, undefined router type: %s", config.Type))
+		return nil, fmt.Errorf("Internal error, undefined router type: %s", config.Type)
 	}
 }

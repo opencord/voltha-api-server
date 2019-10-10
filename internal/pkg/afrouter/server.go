@@ -22,6 +22,7 @@ import (
 	"github.com/opencord/voltha-go/common/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"net"
 	"net/url"
 	"strconv"
@@ -43,7 +44,7 @@ type server struct {
 }
 
 func newServer(config *ServerConfig) (*server, error) {
-	var err error = nil
+	var err error
 	var rtrn_err = false
 	var s *server
 	// Change over to the new configuration format
@@ -107,6 +108,7 @@ func newServer(config *ServerConfig) (*server, error) {
 				}
 			}
 		}
+
 		// Configure the grpc handler
 		s.proxyServer = grpc.NewServer(
 			grpc.CustomCodec(Codec()),
@@ -143,7 +145,7 @@ func (s *server) handler(srv interface{}, serverStream grpc.ServerStream) error 
 	// Determine what router is intended to handle this request
 	fullMethodName, ok := grpc.MethodFromServerStream(serverStream)
 	if !ok {
-		return grpc.Errorf(codes.Internal, "lowLevelServerStream doesn't exist in context")
+		return status.Errorf(codes.Internal, "lowLevelServerStream doesn't exist in context")
 	}
 	log.Debugf("\n\nProcessing grpc request %s on server %s", fullMethodName, s.name)
 	methodInfo := newMethodDetails(fullMethodName)

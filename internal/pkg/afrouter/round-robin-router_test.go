@@ -19,21 +19,11 @@ package afrouter
 import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"github.com/opencord/voltha-go/common/log"
 	common_pb "github.com/opencord/voltha-protos/go/common"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"testing"
 )
-
-const (
-	ROUND_ROBIN_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
-)
-
-func init() {
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 func MakeRoundRobinTestConfig(numBackends int, numConnections int) (*RouteConfig, *RouterConfig) {
 
@@ -77,7 +67,7 @@ func MakeRoundRobinTestConfig(numBackends int, numConnections int) (*RouteConfig
 		ProtoService: "VolthaService",
 		ProtoPackage: "voltha",
 		Routes:       []RouteConfig{routeConfig},
-		ProtoFile:    ROUND_ROBIN_ROUTER_PROTOFILE,
+		ProtoFile:    TEST_PROTOFILE,
 	}
 	return &routeConfig, &routerConfig
 }

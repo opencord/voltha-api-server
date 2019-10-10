@@ -227,14 +227,14 @@ func (conf *Configuration) LoadConfig() error {
 						log.Debugf("Reference to router '%s' found for package '%s'", rPkg.Router, rPkg.Package)
 						conf.Servers[k].routers[rPkg.Package] = &conf.Routers[rk]
 					} else {
-						err := errors.New(fmt.Sprintf("Duplicate router '%s' defined for package '%s'", rPkg.Router, rPkg.Package))
+						err := fmt.Errorf("Duplicate router '%s' defined for package '%s'", rPkg.Router, rPkg.Package)
 						log.Error(err)
 						return err
 					}
 				}
 			}
 			if !found {
-				err := errors.New(fmt.Sprintf("Router %s for server %s not found in config", conf.Servers[k].Name, rPkg.Router))
+				err := fmt.Errorf("Router %s for server %s not found in config", conf.Servers[k].Name, rPkg.Router)
 				log.Error(err)
 				return err
 			}
@@ -252,14 +252,14 @@ func (conf *Configuration) LoadConfig() error {
 					conf.Routers[rk].Routes[rtk].backendCluster = &conf.BackendClusters[bek]
 					found = true
 				} else if rtv.BackendCluster == bev.Name && found {
-					err := errors.New(fmt.Sprintf("Duplicate backend defined, %s", conf.BackendClusters[bek].Name))
+					err := fmt.Errorf("Duplicate backend defined, %s", conf.BackendClusters[bek].Name)
 					log.Error(err)
 					return err
 				}
 			}
 			if !found {
-				err := errors.New(fmt.Sprintf("Backend %s for router %s not found in config",
-					rtv.BackendCluster, rv.Name))
+				err := fmt.Errorf("Backend %s for router %s not found in config",
+					rtv.BackendCluster, rv.Name)
 				log.Error(err)
 				return err
 			}

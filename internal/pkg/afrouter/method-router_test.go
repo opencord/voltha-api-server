@@ -19,24 +19,12 @@ package afrouter
 import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"github.com/opencord/voltha-go/common/log"
 	common_pb "github.com/opencord/voltha-protos/go/common"
 	voltha_pb "github.com/opencord/voltha-protos/go/voltha"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"testing"
 )
-
-const (
-	METHOD_ROUTER_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
-)
-
-// Unit test initialization
-func init() {
-	// Logger must be configured or bad things happen
-	log.SetDefaultLogger(log.JSON, log.DebugLevel, log.Fields{"instanceId": 1})
-	log.AddPackage(log.JSON, log.WarnLevel, nil)
-}
 
 // Build an method router configuration
 func MakeMethodTestConfig(numBackends int, numConnections int) (*RouteConfig, *RouterConfig) {
@@ -83,7 +71,7 @@ func MakeMethodTestConfig(numBackends int, numConnections int) (*RouteConfig, *R
 		ProtoService: "VolthaService",
 		ProtoPackage: "voltha",
 		Routes:       []RouteConfig{routeConfig},
-		ProtoFile:    METHOD_ROUTER_PROTOFILE,
+		ProtoFile:    TEST_PROTOFILE,
 	}
 	return &routeConfig, &routerConfig
 }

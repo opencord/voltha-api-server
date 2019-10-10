@@ -148,10 +148,15 @@ GOCOVER_COBERTURA:=$(shell which gocover-cobertura)
 
 GOLANGCI_LINT_TOOL:=$(shell which golangci-lint)
 sca:
+ifeq (,$(GOLANGCI_LINT_TOOL))
 	@echo "Please install golangci-lint tool to run sca"
+	exit 1
+endif
+	rm -rf ./sca-report
 	@mkdir -p ./sca-report
-	golangci-lint run --out-format junit-xml ./... 2>&1 | tee ./sca-report/sca-report.xml ;\
-	rm -rf sca-report
+	$(GOLANGCI_LINT_TOOL) run --out-format junit-xml ./... 2>&1 | tee ./sca-report/sca-report.xml ;\
+	RETURN=$$? ;\
+	exit $$RETURN
 
 test:
 ifeq (,$(GO_JUNIT_REPORT))
@@ -172,5 +177,6 @@ endif
 clean:
 
 distclean: clean
+	rm -rf ./sca_report
 
 # end file
