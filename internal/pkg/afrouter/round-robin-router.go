@@ -17,7 +17,6 @@
 package afrouter
 
 import (
-	"errors"
 	"fmt"
 	"github.com/opencord/voltha-go/common/log"
 	"google.golang.org/grpc"
@@ -31,7 +30,7 @@ type RoundRobinRouter struct {
 }
 
 func newRoundRobinRouter(rconf *RouterConfig, config *RouteConfig) (Router, error) {
-	var err error = nil
+	var err error
 	var rtrn_err = false
 	// Validate the configuration
 
@@ -53,7 +52,6 @@ func newRoundRobinRouter(rconf *RouterConfig, config *RouteConfig) (Router, erro
 	}
 
 	var bptr *backend
-	bptr = nil
 	rr := RoundRobinRouter{
 		name:           config.Name,
 		grpcService:    rconf.ProtoService,
@@ -61,7 +59,7 @@ func newRoundRobinRouter(rconf *RouterConfig, config *RouteConfig) (Router, erro
 	}
 
 	// Create the backend cluster or link to an existing one
-	ok := true
+	var ok bool
 	if rr.cluster, ok = clusters[config.backendCluster.Name]; !ok {
 		if rr.cluster, err = newBackendCluster(config.backendCluster); err != nil {
 			log.Errorf("Could not create a backend for router %s", config.Name)
@@ -70,7 +68,7 @@ func newRoundRobinRouter(rconf *RouterConfig, config *RouteConfig) (Router, erro
 	}
 
 	if rtrn_err {
-		return rr, errors.New(fmt.Sprintf("Failed to create a new router '%s'", rr.name))
+		return rr, fmt.Errorf("Failed to create a new router '%s'", rr.name)
 	}
 
 	return rr, nil

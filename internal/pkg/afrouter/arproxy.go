@@ -25,7 +25,7 @@ import (
 )
 
 // String names for display in error messages.
-var arProxy *ArouterProxy = nil
+var arProxy *ArouterProxy
 
 type ArouterProxy struct {
 	servers map[string]*server // Defined in handler.go
