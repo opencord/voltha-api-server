@@ -28,6 +28,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Hello World")
 
 	conf, err := afrouter.ParseCmd()
 	if err != nil {
