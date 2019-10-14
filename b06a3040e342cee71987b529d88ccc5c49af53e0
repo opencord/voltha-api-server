@@ -22,6 +22,30 @@
       "revId": "b06a3040e342cee71987b529d88ccc5c49af53e0",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8457ac3_1025f7fd",
+        "filename": "internal/pkg/afrouter/signals.go",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-14T23:02:45Z",
+      "side": 0,
+      "message": "You can\u0027t catch SIGKILL.",
+      "parentUuid": "4cca94f1_c30a5f35",
+      "range": {
+        "startLine": 48,
+        "startChar": 31,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "b06a3040e342cee71987b529d88ccc5c49af53e0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }

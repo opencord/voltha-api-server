@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f974f827_99819a17",
+        "filename": "internal/pkg/afrouter/affinity-router.go",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-14T23:02:45Z",
+      "side": 1,
+      "message": "I\u0027ll remove it and find out (linter complained about the assignment being on a separate line from the declaration, but not about the assignment being redundant with the zero value).",
+      "parentUuid": "5017e3a5_815a01f9",
+      "range": {
+        "startLine": 76,
+        "startChar": 21,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "bc220dc910850565906d8e282faf7d088a6dc6b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53de5a95_7268c8e8",
         "filename": "internal/pkg/afrouter/server_test.go",
         "patchSetId": 14
@@ -36,6 +60,30 @@
       "writtenOn": "2019-10-14T22:38:54Z",
       "side": 1,
       "message": "if we remove it, what happens?",
+      "range": {
+        "startLine": 50,
+        "startChar": 5,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "bc220dc910850565906d8e282faf7d088a6dc6b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee04348_d0fb7706",
+        "filename": "internal/pkg/afrouter/server_test.go",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-14T23:02:45Z",
+      "side": 1,
+      "message": "I was going to leave it in case the author had intended future use of it, but let me go ahead and remove it. It probably just got copy/pasted from one of the other tests. Can always be re-added easily enough for it.",
+      "parentUuid": "53de5a95_7268c8e8",
       "range": {
         "startLine": 50,
         "startChar": 5,
