@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5017e3a5_815a01f9",
+        "filename": "internal/pkg/afrouter/affinity-router.go",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-14T22:38:54Z",
+      "side": 1,
+      "message": "aren\u0027t pointers assigned nil by default (their zero value)",
+      "range": {
+        "startLine": 76,
+        "startChar": 21,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "bc220dc910850565906d8e282faf7d088a6dc6b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53de5a95_7268c8e8",
+        "filename": "internal/pkg/afrouter/server_test.go",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-14T22:38:54Z",
+      "side": 1,
+      "message": "if we remove it, what happens?",
+      "range": {
+        "startLine": 50,
+        "startChar": 5,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "bc220dc910850565906d8e282faf7d088a6dc6b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
