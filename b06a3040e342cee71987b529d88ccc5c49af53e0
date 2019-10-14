@@ -46,6 +46,30 @@
       "revId": "b06a3040e342cee71987b529d88ccc5c49af53e0",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c7c44af_5393ed78",
+        "filename": "internal/pkg/afrouter/signals.go",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-14T23:07:23Z",
+      "side": 0,
+      "message": "Maybe it just has to practice and try harder ...",
+      "parentUuid": "e8457ac3_1025f7fd",
+      "range": {
+        "startLine": 48,
+        "startChar": 31,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "b06a3040e342cee71987b529d88ccc5c49af53e0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
