@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bec74324_ab01aa87",
+        "filename": "internal/pkg/afrouter/config_test.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-14T20:19:02Z",
+      "side": 1,
+      "message": "I\u0027ve moved the init() function to the common_test.go file, so we no longer need init functions in each individual unit test.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "7716ca14c17e337d50d9086624476bb3f9a20039",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
