@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b8a93f2_a1f82a4e",
+        "filename": "Makefile",
+        "patchSetId": 16
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-15T00:16:04Z",
+      "side": 1,
+      "message": "do we want the `rm -rf ./sca-report` before so we clear any data from previous runs?",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 23
+      },
+      "revId": "511cb4c3a4b5ceb66a4c6c5f36171651a343a562",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c9c5fb4_2725d06b",
+        "filename": "Makefile",
+        "patchSetId": 16
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-15T00:16:04Z",
+      "side": 1,
+      "message": "do we remove the ./sca-report directory and other test result directories here?",
+      "revId": "511cb4c3a4b5ceb66a4c6c5f36171651a343a562",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
