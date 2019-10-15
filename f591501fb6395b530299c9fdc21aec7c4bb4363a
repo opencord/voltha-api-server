@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ea8db18_04e06527",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-15T21:09:12Z",
+      "side": 1,
+      "message": "this wasn\u0027t working for me on MPB, but the following was\n\n        $(GOLANGCI_LINT_TOOL) run --issues-exit-code\u003d1 --out-format $(GOLANGCI_LINT_OUT_FORMAT) ./... 2\u003e\u00261 \u0026\u0026 exit $$? | tee ./sca-report/sca-report",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 14
+      },
+      "revId": "f591501fb6395b530299c9fdc21aec7c4bb4363a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
