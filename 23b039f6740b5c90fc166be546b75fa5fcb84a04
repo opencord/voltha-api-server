@@ -16,6 +16,24 @@
       "revId": "23b039f6740b5c90fc166be546b75fa5fcb84a04",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b1991e9_4b01c9fd",
+        "filename": "internal/pkg/afrouter/config_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-15T16:58:57Z",
+      "side": 1,
+      "message": "GOPATH doesn\u0027t exist in the case of using `go mod` or at least is it not going to point to the local development area.\n\n`make test` wasn\u0027t working in a fresh clone which is why I raised this issue and fix.\n\nWhen you say in .../internal/pkg/aftrouter make test is not working, I am not sure what that means. are you starting `make test` in the subdirectory `internal/pkg/afrouter`?",
+      "parentUuid": "abefdfec_2d507cb4",
+      "revId": "23b039f6740b5c90fc166be546b75fa5fcb84a04",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
