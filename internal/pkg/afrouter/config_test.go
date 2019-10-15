@@ -32,7 +32,13 @@ func MakeConfigTestConfig() *Configuration {
 	config := Configuration{}
 
 	cmdParse := flag.NewFlagSet(path.Base(os.Args[0]), flag.ContinueOnError)
-	confFilePath = fmt.Sprintf("%s/src/github.com/opencord/voltha-api-server/arouter.json", os.Getenv("GOPATH"))
+
+	/*
+	 * The test code is run in the context (path) the package under test,
+	 * as such the "PWD" is "$BASE/internal/pkg/afrouter". The config being
+	 * used for testing is 3 directories up.
+	 */
+	confFilePath = "../../../arouter.json"
 	config.ConfigFile = cmdParse.String("config", confFilePath, "The configuration file for the affinity router")
 
 	return &config
