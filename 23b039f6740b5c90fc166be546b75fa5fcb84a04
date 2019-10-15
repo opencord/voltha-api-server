@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abefdfec_2d507cb4",
+        "filename": "internal/pkg/afrouter/config_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000574
+      },
+      "writtenOn": "2019-10-15T16:53:56Z",
+      "side": 1,
+      "message": "I am used to run tests from: $GOPATH/src/github.com/opencord/voltha-api-server\nUsing $GOPATH I belived it is more general.\nIn …/internal/pkg/afrouter \u0027make test\u0027 do not work in my environment.",
+      "revId": "23b039f6740b5c90fc166be546b75fa5fcb84a04",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
