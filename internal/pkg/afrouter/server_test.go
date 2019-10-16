@@ -18,8 +18,33 @@ package afrouter
 
 import (
 	"github.com/stretchr/testify/assert"
+	"net"
 	"testing"
 )
+
+// GetFreePort asks the kernel for a free open port that is ready to use.
+func GetFreePort() (int, error) {
+	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
+	if err != nil {
+		return 0, err
+	}
+
+	l, err := net.ListenTCP("tcp", addr)
+	if err != nil {
+		return 0, err
+	}
+	defer l.Close()
+	return l.Addr().(*net.TCPAddr).Port, nil
+}
+
+// Ask the kernel for a free open port that is ready to use
+func GetPort() int {
+	port, err := GetFreePort()
+	if err != nil {
+		panic(err)
+	}
+	return port
+}
 
 func MakeServerTestConfig() *ServerConfig {
 	var routerPackage []RouterPackage
@@ -32,7 +57,7 @@ func MakeServerTestConfig() *ServerConfig {
 
 	serverConfig := ServerConfig{
 		Name:    "grpc_command",
-		Port:    55555,
+		Port:    uint(GetPort()),
 		Addr:    "127.0.0.1",
 		Type:    "grpc",
 		Routers: routerPackage,
@@ -106,23 +131,10 @@ func TestServerInitWrongType(t *testing.T) {
 func TestServerInitNoRouter(t *testing.T) {
 
 	serverConfig := MakeServerTestConfig()
-	serverConfig.routers = nil
+	serverConfig.Routers = nil
 
 	serv, err := newServer(serverConfig)
 
 	assert.Nil(t, serv)
 	assert.NotNil(t, err)
-}
-
-// Test creation of a new Server
-func TestServerInitHandler(t *testing.T) {
-
-	serverConfig := MakeServerTestConfig()
-	serverConfig.Port = 55556
-
-	serv, err := newServer(serverConfig)
-
-	assert.NotNil(t, serv)
-	assert.Nil(t, err)
-
 }
