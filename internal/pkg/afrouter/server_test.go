@@ -17,12 +17,15 @@
 package afrouter
 
 import (
+	"github.com/phayes/freeport"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func MakeServerTestConfig() *ServerConfig {
+func MakeServerTestConfig() (*ServerConfig, error) {
 	var routerPackage []RouterPackage
+
+	freePort, errP := freeport.GetFreePort()
 
 	routerPackageConfig := RouterPackage{
 		Router:  `json:"router"`,
@@ -32,20 +35,22 @@ func MakeServerTestConfig() *ServerConfig {
 
 	serverConfig := ServerConfig{
 		Name:    "grpc_command",
-		Port:    55555,
+		Port:    uint(freePort),
 		Addr:    "127.0.0.1",
 		Type:    "grpc",
 		Routers: routerPackage,
 		routers: make(map[string]*RouterConfig),
 	}
-	return &serverConfig
+	return &serverConfig, errP
 
 }
 
 // Test creation of a new Server
 func TestServerInit(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig()
+	serverConfig, errConf := MakeServerTestConfig()
+	assert.NotNil(t, serverConfig)
+	assert.Nil(t, errConf)
 
 	serv, err := newServer(serverConfig)
 
@@ -57,7 +62,10 @@ func TestServerInit(t *testing.T) {
 // Test creation of a new Server, error in Addr
 func TestServerInitWrongAddr(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig()
+	serverConfig, errConf := MakeServerTestConfig()
+	assert.NotNil(t, serverConfig)
+	assert.Nil(t, errConf)
+
 	serverConfig.Addr = "127.300.1.1"
 
 	serv, err := newServer(serverConfig)
@@ -69,7 +77,10 @@ func TestServerInitWrongAddr(t *testing.T) {
 // Test creation of a new Server, error in Port
 func TestServerInitWrongPort(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig()
+	serverConfig, errConf := MakeServerTestConfig()
+	assert.NotNil(t, serverConfig)
+	assert.Nil(t, errConf)
+
 	serverConfig.Port = 23
 
 	serv, err := newServer(serverConfig)
@@ -81,7 +92,10 @@ func TestServerInitWrongPort(t *testing.T) {
 // Test creation of a new Server, error in Name
 func TestServerInitNoName(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig()
+	serverConfig, errConf := MakeServerTestConfig()
+	assert.NotNil(t, serverConfig)
+	assert.Nil(t, errConf)
+
 	serverConfig.Name = ""
 
 	serv, err := newServer(serverConfig)
@@ -93,7 +107,10 @@ func TestServerInitNoName(t *testing.T) {
 // Test creation of a new Server, error in Type
 func TestServerInitWrongType(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig()
+	serverConfig, errConf := MakeServerTestConfig()
+	assert.NotNil(t, serverConfig)
+	assert.Nil(t, errConf)
+
 	serverConfig.Type = "xxx"
 
 	serv, err := newServer(serverConfig)
@@ -102,27 +119,17 @@ func TestServerInitWrongType(t *testing.T) {
 	assert.NotNil(t, err)
 }
 
-// Test creation of a new Server, error in Router
+// Test creation of a new Server, error in Routers
 func TestServerInitNoRouter(t *testing.T) {
 
-	serverConfig := MakeServerTestConfig()
-	serverConfig.routers = nil
+	serverConfig, errConf := MakeServerTestConfig()
+	assert.NotNil(t, serverConfig)
+	assert.Nil(t, errConf)
+
+	serverConfig.Routers = nil
 
 	serv, err := newServer(serverConfig)
 
 	assert.Nil(t, serv)
 	assert.NotNil(t, err)
-}
-
-// Test creation of a new Server
-func TestServerInitHandler(t *testing.T) {
-
-	serverConfig := MakeServerTestConfig()
-	serverConfig.Port = 55556
-
-	serv, err := newServer(serverConfig)
-
-	assert.NotNil(t, serv)
-	assert.Nil(t, err)
-
 }
