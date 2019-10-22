@@ -393,6 +393,35 @@ func TestAffinityRouterDecodeProtoField(t *testing.T) {
 	assert.EqualError(t, err, "Only integer and string route selectors are permitted")
 }
 
+func TestAffinityRouterDecodeProtoFieldMissingField(t *testing.T) {
+	AffinityTestSetup()
+
+	_, routerConfig := MakeAffinityTestConfig(2, 1)
+
+	_, err := newRouter(routerConfig)
+	assert.Nil(t, err)
+
+	// Get the created AffinityRouter so we can inspect its state
+	aRouter := allRouters["vcoredev_manager"].(AffinityRouter)
+
+	// Pick something to test with lots of field types. Port is a good candidate.
+	portMessage := &voltha_pb.Port{PortNo: 123,
+		Label:     "testlabel",
+		Type:      3,
+		DeviceId:  "5678",
+		RxPackets: 9876,
+	}
+
+	portData, err := proto.Marshal(portMessage)
+	assert.Nil(t, err)
+
+	// Field #5 is not present.
+	// See VOL-1952. This used to cause a panic.
+
+	_, err = aRouter.decodeProtoField(portData, 5) // field 5 is PortNo
+	assert.EqualError(t, err, "At end of message, attribute 5 not found")
+}
+
 // Test setting affinity for a key to a backend
 func TestAffinitySetAffinity(t *testing.T) {
 	AffinityTestSetup()

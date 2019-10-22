@@ -84,7 +84,7 @@ func TestSourceRouterDecodeProtoField(t *testing.T) {
 	_, err := newRouter(routerConfig)
 	assert.Nil(t, err)
 
-	// Get the created AffinityRouter so we can inspect its state
+	// Get the created SourceRouter so we can inspect its state
 	sourceRouter := allRouters["vcorelogger"].(SourceRouter)
 
 	loggingMessage := &common_pb.Logging{Level: 1,
@@ -101,6 +101,25 @@ func TestSourceRouterDecodeProtoField(t *testing.T) {
 	s, err = sourceRouter.decodeProtoField(loggingData, 3) // field 2 is component_name
 	assert.Nil(t, err)
 	assert.Equal(t, s, "ro_vcore0.ro_vcore01")
+}
+
+func TestSourceRouterDecodeProtoFieldMissingField(t *testing.T) {
+	_, routerConfig := MakeSourceRouterTestConfig()
+	_, err := newRouter(routerConfig)
+	assert.Nil(t, err)
+
+	// Get the created SourceRouter so we can inspect its state
+	sourceRouter := allRouters["vcorelogger"].(SourceRouter)
+
+	loggingMessage := &common_pb.Logging{Level: 1,
+		PackageName:   "default",
+		ComponentName: "ro_vcore0.ro_vcore01"}
+
+	loggingData, err := proto.Marshal(loggingMessage)
+	assert.Nil(t, err)
+
+	_, err = sourceRouter.decodeProtoField(loggingData, 123) // field 123 does not exist
+	assert.EqualError(t, err, "At end of message, attribute 123 not found")
 }
 
 func TestSourceRouterRoute(t *testing.T) {
