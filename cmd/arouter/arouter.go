@@ -82,6 +82,9 @@ func main() {
 		// and start it.
 		// This function never returns unless an error
 		// occurs or a signal is caught.
+	} else if *conf.DryRun {
+		// Do nothing
+		return
 	} else if err := ap.ListenAndServe(); err != nil {
 		log.Errorf("Exiting on error %v", err)
 	}
