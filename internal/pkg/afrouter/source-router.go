@@ -198,6 +198,11 @@ func (ar SourceRouter) decodeProtoField(payload []byte, fieldId byte) (string, e
 	b := proto.NewBuffer([]byte{})
 	//b.DebugPrint("The Buffer", payload)
 	for { // Find the route selector field
+		if idx >= len(payload) {
+			err := fmt.Errorf("At end of message, attribute %d not found", fieldId)
+			return "", err
+		}
+
 		log.Debugf("Decoding source value attributeNumber: %d from %v at index %d", fieldId, payload, idx)
 		log.Debugf("Attempting match with payload: %d, methodTable: %d", payload[idx], fieldId)
 		if payload[idx]>>3 == fieldId {
