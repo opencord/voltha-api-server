@@ -18,7 +18,7 @@ package afrouterd
 
 import (
 	"fmt"
-	"github.com/opencord/voltha-go/common/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

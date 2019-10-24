@@ -17,7 +17,7 @@
 package afrouter
 
 import (
-	"github.com/opencord/voltha-go/common/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	"regexp"
 )
 

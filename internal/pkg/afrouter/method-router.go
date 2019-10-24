@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"github.com/opencord/voltha-go/common/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"io/ioutil"

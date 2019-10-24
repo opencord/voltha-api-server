@@ -19,7 +19,7 @@ package afrouterd
 import (
 	"fmt"
 	"github.com/golang/protobuf/ptypes/empty"
-	"github.com/opencord/voltha-go/common/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
 	cmn "github.com/opencord/voltha-protos/go/common"
 	vpb "github.com/opencord/voltha-protos/go/voltha"

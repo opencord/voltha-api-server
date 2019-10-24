@@ -23,7 +23,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/golang/protobuf/protoc-gen-go/descriptor"
-	"github.com/opencord/voltha-go/common/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	"io/ioutil"
 	"os"
 	"path"

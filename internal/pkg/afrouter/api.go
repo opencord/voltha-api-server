@@ -19,7 +19,7 @@ package afrouter
 import (
 	"errors"
 	"fmt"
-	"github.com/opencord/voltha-go/common/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
 	common_pb "github.com/opencord/voltha-protos/go/common"
 	"golang.org/x/net/context"

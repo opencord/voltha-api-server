@@ -20,11 +20,11 @@ import (
 	"flag"
 	"fmt"
 	"github.com/opencord/voltha-api-server/internal/pkg/afrouterd"
-	"github.com/opencord/voltha-go/common/version"
+	"github.com/opencord/voltha-lib-go/v2/pkg/version"
 	"os"
 	"path"
 
-	"github.com/opencord/voltha-go/common/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
 	"golang.org/x/net/context"
 )

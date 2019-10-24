@@ -19,8 +19,8 @@ package main
 import (
 	"fmt"
 	"github.com/opencord/voltha-api-server/internal/pkg/afrouter"
-	"github.com/opencord/voltha-go/common/log"
-	"github.com/opencord/voltha-go/common/version"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/version"
 	_ "github.com/opencord/voltha-protos"
 	"google.golang.org/grpc/grpclog"
 	"io/ioutil"

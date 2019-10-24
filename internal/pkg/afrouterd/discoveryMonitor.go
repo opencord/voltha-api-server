@@ -19,8 +19,8 @@ package afrouterd
 import (
 	"errors"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/opencord/voltha-go/common/log"
-	"github.com/opencord/voltha-go/kafka"
+	"github.com/opencord/voltha-lib-go/v2/pkg/kafka"
+	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
 	ic "github.com/opencord/voltha-protos/go/inter_container"
 	"golang.org/x/net/context"
