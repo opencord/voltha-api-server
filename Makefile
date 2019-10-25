@@ -48,7 +48,6 @@ DOCKER_BUILD_ARGS ?= \
 	--build-arg org_opencord_vcs_dirty="${DOCKER_LABEL_VCS_DIRTY}"
 
 DOCKER_BUILD_ARGS_LOCAL ?= ${DOCKER_BUILD_ARGS} \
-	--build-arg LOCAL_PYVOLTHA=${LOCAL_PYVOLTHA} \
 	--build-arg LOCAL_PROTOS=${LOCAL_PROTOS}
 
 # Default is GO111MODULE=auto, which will refuse to use go mod if running
@@ -58,7 +57,7 @@ DOCKER_BUILD_ARGS_LOCAL ?= ${DOCKER_BUILD_ARGS} \
 # inside a GOPATH).
 export GO111MODULE=on
 
-.PHONY: rw_core ro_core afrouter afrouterd local-protos local-pyvoltha
+.PHONY: rw_core ro_core afrouter afrouterd local-protos local-lib-go
 
 # This should to be the first and default target in this Makefile
 help:
@@ -77,15 +76,27 @@ help:
 	@echo "lint-sanity          : Verify that 'go vet' doesn't report any issues"
 	@echo "lint-mod             : Verify the integrity of the 'mod' files"
 	@echo "lint                 : Shorthand for lint-style & lint-sanity"
-        @echo "sca               : Runs various SCA through golangci-lint tool"
-        @echo "test                 : Generate reports for all go tests"
+	@echo "local-lib-go         : Copies a local version of the VOTLHA dependencies into the vendor directory"
+	@echo "local-protos         : Copies a local verison of the VOLTHA protos into the vendor directory"
+  @echo "sca                  : Runs various SCA through golangci-lint tool"
+  @echo "test                 : Generate reports for all go tests"
 	@echo
 
 ## Local Development Helpers
 local-protos:
 ifdef LOCAL_PROTOS
-	mkdir -p vendor/github.com/opencord/voltha-protos
-	cp -r ${GOPATH}/src/github.com/opencord/voltha-protos/voltha.pb vendor/github.com/opencord/voltha-protos/
+	rm -rf vendor/github.com/opencord/voltha-protos/go
+	mkdir -p vendor/github.com/opencord/voltha-protos/go
+	cp -r ${LOCAL_PROTOS}/go/* vendor/github.com/opencord/voltha-protos/go
+	rm -rf vendor/github.com/opencord/voltha-protos/go/vendor
+endif
+
+## Local Development Helpers
+local-lib-go:
+ifdef LOCAL_LIB_GO
+	rm -rf vendor/github.com/opencord/voltha-lib-go
+	mkdir -p vendor/github.com/opencord/voltha-lib-go/v2/pkg
+	cp -r ${LOCAL_LIB_GO}/pkg/* vendor/github.com/opencord/voltha-lib-go/v2/pkg/
 endif
 
 ## Docker targets
@@ -94,10 +105,10 @@ build: docker-build
 
 docker-build: afrouter afrouterd
 
-afrouter: local-protos
+afrouter: local-protos local-lib-go
 	docker build $(DOCKER_BUILD_ARGS) -t ${AFROUTER_IMAGENAME}:${DOCKER_TAG} -t ${AFROUTER_IMAGENAME}:latest -f docker/Dockerfile.afrouter .
 
-afrouterd: local-protos
+afrouterd: local-protos local-lib-go
 	docker build $(DOCKER_BUILD_ARGS) -t ${AFROUTERD_IMAGENAME}:${DOCKER_TAG} -t ${AFROUTERD_IMAGENAME}:latest -f docker/Dockerfile.afrouterd .
 
 docker-push:
