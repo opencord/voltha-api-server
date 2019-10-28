@@ -22,6 +22,30 @@
       "revId": "b576b9aa7a65c17000ddf3b5147adb69d33bf799",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6d77923_3f467976",
+        "filename": "Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-10-28T18:13:25Z",
+      "side": 1,
+      "message": "also please delete any nested vendor directory after the copy.",
+      "parentUuid": "90073f10_420bb8cc",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 97,
+        "endChar": 6
+      },
+      "revId": "b576b9aa7a65c17000ddf3b5147adb69d33bf799",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
