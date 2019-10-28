@@ -46,6 +46,30 @@
       "revId": "b576b9aa7a65c17000ddf3b5147adb69d33bf799",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57f2900e_d48d40bf",
+        "filename": "Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-28T19:13:05Z",
+      "side": 1,
+      "message": "We\u0027re only copying the pkg directory from voltha-lib, no vendor directory included.",
+      "parentUuid": "b6d77923_3f467976",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 97,
+        "endChar": 6
+      },
+      "revId": "b576b9aa7a65c17000ddf3b5147adb69d33bf799",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
