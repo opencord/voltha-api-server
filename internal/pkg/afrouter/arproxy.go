@@ -21,7 +21,9 @@ package afrouter
 // for the affinity router.
 
 import (
+	"context"
 	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 )
 
 // String names for display in error messages.
@@ -33,7 +35,7 @@ type ArouterProxy struct {
 }
 
 // Create the routing proxy
-func NewArouterProxy(conf *Configuration) (*ArouterProxy, error) {
+func NewArouterProxy(conf *Configuration, ctx context.Context) (*ArouterProxy, error) {
 	arProxy = &ArouterProxy{servers: make(map[string]*server)}
 	// Create all the servers listed in the configuration
 	for _, s := range conf.Servers {
@@ -53,6 +55,7 @@ func NewArouterProxy(conf *Configuration) (*ArouterProxy, error) {
 		arProxy.api = api
 	}
 
+	probe.UpdateStatusFromContext(ctx, "affinity-router-proxy", probe.ServiceStatusRunning)
 	return arProxy, nil
 }
 
