@@ -17,16 +17,17 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"github.com/opencord/voltha-api-server/internal/pkg/afrouterd"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 	"github.com/opencord/voltha-lib-go/v2/pkg/version"
 	"os"
 	"path"
 
 	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
-	"golang.org/x/net/context"
 )
 
 var (
@@ -36,14 +37,18 @@ var (
 
 type Configuration struct {
 	DisplayVersionOnly *bool
+	ProbeHost          *string
+	ProbePort          *int
 }
 
 func startup() int {
 	config := &Configuration{}
 	cmdParse := flag.NewFlagSet(path.Base(os.Args[0]), flag.ContinueOnError)
 	config.DisplayVersionOnly = cmdParse.Bool("version", false, "Print version information and exit")
+	config.ProbeHost = cmdParse.String("probeHost", "", "probe host info")
+	config.ProbePort = cmdParse.Int("probePort", 8081, "probe port info")
 
-	if err := cmdParse.Parse(os.Args[1:]); err != nil {
+	if err := cmdParse.Parse(os.Args[2:]); err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return 1
 	}
@@ -62,15 +67,43 @@ func startup() int {
 	// Set up kubernetes api
 	clientset := afrouterd.K8sClientSet()
 
+	/*
+	 * Create and start the liveness and readiness container management probes. This
+	 * is done in the main function so just in case the main starts multiple other
+	 * objects there can be a single probe end point for the process.
+	 */
+	ctx, cancel := context.WithCancel(context.Background())
+
+	p := &probe.Probe{}
+	go p.ListenAndServe(fmt.Sprintf("%s:%d", *config.ProbeHost, *config.ProbePort))
+	//go p.ListenAndServe(*config.ProbeHost, *config.ProbePort)
+
+	// Add the probe to the context to pass to all the services started
+	probeCtx := context.WithValue(ctx, probe.ProbeContextKey, p)
+
+	// If the context has a probe then fetch it and register our services
+	if value := ctx.Value(probe.ProbeContextKey); value != nil {
+		if _, ok := value.(*probe.Probe); ok {
+			p = value.(*probe.Probe)
+			p.RegisterService(
+				"affinity-router",
+				"message-bus",
+			)
+		}
+	}
+
 	for {
 		// Connect to the affinity router
-		conn, err := afrouterd.Connect(context.Background(), afrouterApiAddress) // This is a sidecar container so communicating over localhost
+		conn, err := afrouterd.Connect(probeCtx, afrouterApiAddress) // This is a sidecar container so communicating over localhost
 		if err != nil {
 			panic(err)
 		}
+		if p != nil {
+			p.UpdateStatus("affinity-router", probe.ServiceStatusRunning)
+		}
 
 		// monitor the connection status, end context if connection is lost
-		ctx := afrouterd.ConnectionActiveContext(conn)
+		afrouterd.ConnectionActiveContext(conn, probeCtx, cancel)
 
 		// set up the client
 		client := pb.NewConfigurationClient(conn)
@@ -79,10 +112,10 @@ func startup() int {
 		// these two processes do the majority of the work
 
 		log.Info("Starting discovery monitoring")
-		doneCh, _ := afrouterd.StartDiscoveryMonitor(ctx, client)
+		doneCh, _ := afrouterd.StartDiscoveryMonitor(probeCtx, client)
 
 		log.Info("Starting core monitoring")
-		afrouterd.CoreMonitor(ctx, client, clientset)
+		afrouterd.CoreMonitor(probeCtx, client, clientset)
 
 		//ensure the discovery monitor to quit
 		<-doneCh
