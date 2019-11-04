@@ -44,11 +44,8 @@ func ParseCmd() (*Configuration, error) {
 
 	err := cmdParse.Parse(os.Args[1:])
 	if err != nil {
-		//return err
 		return nil, errors.New("Error parsing the command line")
 	}
-	//if(!cmdParse.Parsed()) {
-	//}
 
 	if val, have := os.LookupEnv("HOSTNAME"); have {
 		config.InstanceID = val
@@ -179,8 +176,10 @@ type ClientCertConfig struct {
 
 // Api configuration
 type ApiConfig struct {
-	Addr string `json:"address"`
-	Port uint   `json:"port"`
+	Addr      string `json:"address"`
+	Port      uint   `json:"port"`
+	ProbeHost string `json:"probeHost"`
+	ProbePort int    `json:"probePort"`
 }
 
 func (conf *Configuration) LoadConfig() error {
