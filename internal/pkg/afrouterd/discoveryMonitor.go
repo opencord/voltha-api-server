@@ -21,6 +21,7 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/opencord/voltha-lib-go/v2/pkg/kafka"
 	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
 	ic "github.com/opencord/voltha-protos/go/inter_container"
 	"golang.org/x/net/context"
@@ -85,10 +86,12 @@ func StartDiscoveryMonitor(ctx context.Context, client pb.ConfigurationClient) (
 		panic(err)
 	}
 
+	probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusPreparing)
 	for {
 		if err := kc.Start(); err != nil {
 			log.Error("Could not connect to kafka")
 		} else {
+			probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusRunning)
 			break
 		}
 		select {
@@ -104,6 +107,7 @@ func StartDiscoveryMonitor(ctx context.Context, client pb.ConfigurationClient) (
 		log.Errorf("Could not subscribe to the '%s' channel, discovery disabled", kafkaTopic)
 		close(doneCh)
 		kc.Stop()
+		probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusStopped)
 		return doneCh, err
 	}
 
