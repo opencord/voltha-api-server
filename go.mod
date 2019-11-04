@@ -7,12 +7,14 @@ require (
 	github.com/google/uuid v1.1.1
 	github.com/googleapis/gnostic v0.2.0 // indirect
 	github.com/imdario/mergo v0.3.7 // indirect
+	github.com/jstemmer/go-junit-report v0.9.1 // indirect
 	github.com/onsi/ginkgo v1.10.2 // indirect
 	github.com/onsi/gomega v1.7.0 // indirect
 	github.com/opencord/voltha-lib-go/v2 v2.2.7
 	github.com/opencord/voltha-protos v1.0.3
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/stretchr/testify v1.4.0
+	github.com/t-yuki/gocover-cobertura v0.0.0-20180217150009-aaee18c8195c // indirect
 	golang.org/x/net v0.0.0-20190930134127-c5a3c61f89f3
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	google.golang.org/grpc v1.24.0
