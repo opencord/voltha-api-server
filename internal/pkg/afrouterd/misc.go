@@ -19,6 +19,7 @@ package afrouterd
 import (
 	"fmt"
 	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 	pb "github.com/opencord/voltha-protos/go/afrouter"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -120,6 +121,7 @@ func ConnectionActiveContext(conn *grpc.ClientConn) context.Context {
 		}
 		log.Infof("Connection to afrouter lost")
 		disconnected()
+		probe.UpdateStatusFromContext(ctx, "affinity-router", probe.ServiceStatusStopped)
 	}()
 	return ctx
 }

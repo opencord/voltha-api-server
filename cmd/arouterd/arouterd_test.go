@@ -81,7 +81,6 @@ func TestStartupVersionOnly(t *testing.T) {
   VCS Dirty:    unknown-vcsdirty
   Built:        unknown-buildtime
   OS/Arch:      unknown-os/unknown-arch
-
 `
 	assert.Equal(t, expected, s)
 }
