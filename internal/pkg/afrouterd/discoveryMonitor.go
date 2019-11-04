@@ -21,6 +21,7 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/opencord/voltha-lib-go/v2/pkg/kafka"
 	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 	pb "github.com/opencord/voltha-protos/v2/go/afrouter"
 	ic "github.com/opencord/voltha-protos/v2/go/inter_container"
 	"golang.org/x/net/context"
@@ -52,6 +53,7 @@ func newKafkaClient(clientType string, host string, port int, instanceID string)
 func monitorDiscovery(kc kafka.Client, ctx context.Context, client pb.ConfigurationClient, ch <-chan *ic.InterContainerMessage, doneCh chan<- struct{}) {
 	defer close(doneCh)
 	defer kc.Stop()
+	defer probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusStopped)
 
 monitorLoop:
 	for {
@@ -85,15 +87,18 @@ func StartDiscoveryMonitor(ctx context.Context, client pb.ConfigurationClient) (
 		panic(err)
 	}
 
+	probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusPreparing)
 	for {
 		if err := kc.Start(); err != nil {
 			log.Error("Could not connect to kafka")
 		} else {
+			probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusRunning)
 			break
 		}
 		select {
 		case <-ctx.Done():
 			close(doneCh)
+			probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusStopped)
 			return doneCh, errors.New("GRPC context done")
 
 		case <-time.After(5 * time.Second):
@@ -104,6 +109,7 @@ func StartDiscoveryMonitor(ctx context.Context, client pb.ConfigurationClient) (
 		log.Errorf("Could not subscribe to the '%s' channel, discovery disabled", kafkaTopic)
 		close(doneCh)
 		kc.Stop()
+		probe.UpdateStatusFromContext(ctx, "message-bus", probe.ServiceStatusStopped)
 		return doneCh, err
 	}
 

@@ -17,21 +17,25 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"github.com/opencord/voltha-api-server/internal/pkg/afrouterd"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 	"github.com/opencord/voltha-lib-go/v2/pkg/version"
+	"math"
 	"os"
 	"path"
 
 	"github.com/opencord/voltha-lib-go/v2/pkg/log"
 	pb "github.com/opencord/voltha-protos/v2/go/afrouter"
-	"golang.org/x/net/context"
 )
 
 var (
 	instanceID         = afrouterd.GetStrEnv("HOSTNAME", "arouterd001")
 	afrouterApiAddress = afrouterd.GetStrEnv("AFROUTER_API_ADDRESS", "localhost:55554")
+	probeHost          = afrouterd.GetStrEnv("PROBE_HOST", "")
+	probePort          = afrouterd.GetIntEnv("PROBE_PORT", 0, math.MaxUint16, 8081)
 )
 
 type Configuration struct {
@@ -62,16 +66,26 @@ func startup() int {
 	// Set up kubernetes api
 	clientset := afrouterd.K8sClientSet()
 
+	p := &probe.Probe{}
+	go p.ListenAndServe(fmt.Sprintf("%s:%d", probeHost, probePort))
+
+	p.RegisterService(
+		"affinity-router",
+		"message-bus",
+	)
+
 	for {
 		// Connect to the affinity router
 		conn, err := afrouterd.Connect(context.Background(), afrouterApiAddress) // This is a sidecar container so communicating over localhost
 		if err != nil {
 			panic(err)
 		}
+		p.UpdateStatus("affinity-router", probe.ServiceStatusRunning)
 
 		// monitor the connection status, end context if connection is lost
-		ctx := afrouterd.ConnectionActiveContext(conn)
+		ctx := afrouterd.ConnectionActiveContext(conn, p)
 
+		probeCtx := context.WithValue(ctx, probe.ProbeContextKey, p)
 		// set up the client
 		client := pb.NewConfigurationClient(conn)
 
@@ -79,10 +93,10 @@ func startup() int {
 		// these two processes do the majority of the work
 
 		log.Info("Starting discovery monitoring")
-		doneCh, _ := afrouterd.StartDiscoveryMonitor(ctx, client)
+		doneCh, _ := afrouterd.StartDiscoveryMonitor(probeCtx, client)
 
 		log.Info("Starting core monitoring")
-		afrouterd.CoreMonitor(ctx, client, clientset)
+		afrouterd.CoreMonitor(probeCtx, client, clientset)
 
 		//ensure the discovery monitor to quit
 		<-doneCh

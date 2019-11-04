@@ -19,6 +19,7 @@ package afrouterd
 import (
 	"fmt"
 	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 	pb "github.com/opencord/voltha-protos/v2/go/afrouter"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -110,7 +111,7 @@ func setAffinity(ctx context.Context, client pb.ConfigurationClient, deviceId st
 }
 
 // endOnClose cancels the context when the connection closes
-func ConnectionActiveContext(conn *grpc.ClientConn) context.Context {
+func ConnectionActiveContext(conn *grpc.ClientConn, p *probe.Probe) context.Context {
 	ctx, disconnected := context.WithCancel(context.Background())
 	go func() {
 		for state := conn.GetState(); state != connectivity.TransientFailure && state != connectivity.Shutdown; state = conn.GetState() {
@@ -119,6 +120,7 @@ func ConnectionActiveContext(conn *grpc.ClientConn) context.Context {
 			}
 		}
 		log.Infof("Connection to afrouter lost")
+		p.UpdateStatus("affinity-router", probe.ServiceStatusStopped)
 		disconnected()
 	}()
 	return ctx

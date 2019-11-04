@@ -18,6 +18,7 @@ package afrouter
 
 import (
 	"fmt"
+	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
 	"github.com/phayes/freeport"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -98,9 +99,9 @@ func makeConfig(numBackends int, numConnections int) Configuration {
 }
 
 func makeProxy(numBackends int, numConnections int) (*ArouterProxy, error) {
-
+	p := &probe.Probe{}
 	conf := makeConfig(3, 2)
-	arouter, err := NewArouterProxy(&conf)
+	arouter, err := NewArouterProxy(&conf, p)
 	return arouter, err
 }
 
