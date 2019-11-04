@@ -39,7 +39,7 @@ COPY . .
 COPY arouter.json  /build
 
 # Copy config and runtime protobuf needed for routing
-RUN cp vendor/github.com/opencord/voltha-protos/voltha.pb /build
+RUN cp vendor/github.com/opencord/voltha-protos/v2/voltha.pb /build
 
 ARG org_label_schema_version=unknown
 ARG org_label_schema_vcs_url=unknown

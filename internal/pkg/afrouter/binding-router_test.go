@@ -20,7 +20,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	voltha_pb "github.com/opencord/voltha-protos/go/voltha"
+	voltha_pb "github.com/opencord/voltha-protos/v2/go/voltha"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"

@@ -18,7 +18,7 @@ package afrouter
 
 import (
 	"github.com/golang/protobuf/proto"
-	common_pb "github.com/opencord/voltha-protos/go/common"
+	common_pb "github.com/opencord/voltha-protos/v2/go/common"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

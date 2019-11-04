@@ -9,8 +9,8 @@ require (
 	github.com/imdario/mergo v0.3.7 // indirect
 	github.com/onsi/ginkgo v1.10.2 // indirect
 	github.com/onsi/gomega v1.7.0 // indirect
-	github.com/opencord/voltha-lib-go/v2 v2.2.7
-	github.com/opencord/voltha-protos v1.0.3
+	github.com/opencord/voltha-lib-go/v2 v2.2.9
+	github.com/opencord/voltha-protos/v2 v2.0.1
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/stretchr/testify v1.4.0
 	golang.org/x/net v0.0.0-20190930134127-c5a3c61f89f3

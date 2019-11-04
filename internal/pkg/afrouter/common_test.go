@@ -26,7 +26,7 @@ import (
 )
 
 const (
-	TEST_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/voltha.pb"
+	TEST_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/v2/voltha.pb"
 
 	/*
 	 * This sets the LogLevel of the Voltha logger. It's pinned to FatalLevel here, as we

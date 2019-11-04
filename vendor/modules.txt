@@ -46,18 +46,18 @@ github.com/json-iterator/go
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
 github.com/modern-go/reflect2
-# github.com/opencord/voltha-lib-go/v2 v2.2.7
+# github.com/opencord/voltha-lib-go/v2 v2.2.9
 github.com/opencord/voltha-lib-go/v2/pkg/log
 github.com/opencord/voltha-lib-go/v2/pkg/version
 github.com/opencord/voltha-lib-go/v2/pkg/kafka
-# github.com/opencord/voltha-protos v1.0.3
-github.com/opencord/voltha-protos
-github.com/opencord/voltha-protos/go/afrouter
-github.com/opencord/voltha-protos/go/common
-github.com/opencord/voltha-protos/go/inter_container
-github.com/opencord/voltha-protos/go/voltha
-github.com/opencord/voltha-protos/go/openflow_13
-github.com/opencord/voltha-protos/go/omci
+# github.com/opencord/voltha-protos/v2 v2.0.1
+github.com/opencord/voltha-protos/v2
+github.com/opencord/voltha-protos/v2/go/afrouter
+github.com/opencord/voltha-protos/v2/go/common
+github.com/opencord/voltha-protos/v2/go/inter_container
+github.com/opencord/voltha-protos/v2/go/voltha
+github.com/opencord/voltha-protos/v2/go/openflow_13
+github.com/opencord/voltha-protos/v2/go/omci
 # github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 github.com/phayes/freeport
 # github.com/pierrec/lz4 v2.3.0+incompatible
