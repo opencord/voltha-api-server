@@ -19,8 +19,8 @@ package afrouter
 import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	common_pb "github.com/opencord/voltha-protos/go/common"
-	voltha_pb "github.com/opencord/voltha-protos/go/voltha"
+	common_pb "github.com/opencord/voltha-protos/v2/go/common"
+	voltha_pb "github.com/opencord/voltha-protos/v2/go/voltha"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"testing"
