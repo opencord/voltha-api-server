@@ -67,7 +67,7 @@ func TestStartupVersionOnly(t *testing.T) {
 	oldArgs := os.Args
 	defer func() { os.Args = oldArgs }()
 
-	os.Args = []string{os.Args[0], "--version"}
+	os.Args = []string{os.Args[0], "--version", "--probePort", "--probeHost"}
 
 	status, s, err := CaptureStdout(startup)
 	assert.Nil(t, err)
@@ -81,7 +81,6 @@ func TestStartupVersionOnly(t *testing.T) {
   VCS Dirty:    unknown-vcsdirty
   Built:        unknown-buildtime
   OS/Arch:      unknown-os/unknown-arch
-
 `
 	assert.Equal(t, expected, s)
 }
