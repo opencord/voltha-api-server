@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6cdc5d04_ca8a6a19",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-11-05T19:36:21Z",
+      "side": 1,
+      "message": "This is ignoring the first command-line argument passed to arouterd. In the case of the unit tests, this is `--version`, which is causing the unit test to fail.\n\nWhat was the reason for ignoring the first argument?",
+      "range": {
+        "startLine": 51,
+        "startChar": 1,
+        "endLine": 51,
+        "endChar": 52
+      },
+      "revId": "97f1ad069a990d6b8d3a044aa97c1e0ffc5e3217",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
