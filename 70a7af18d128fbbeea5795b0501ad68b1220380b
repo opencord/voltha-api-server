@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79ae2056_27cdf22a",
+        "filename": "cmd/arouter/arouter.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "If there\u0027s no context already being passed, just pass the probe directly.",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0af49d1e_0cd247ea",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "Arouterd uses env vars to pass configuration (sole exception is --version).  Please comply with the standard.  See internal/pkg/afrouterd/misc.go",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a18c2299_ce159cb3",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "Do we really want to create a new context just to pass the probe around?",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed7ba449_96b04f5d",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "No need to lookup the probe from the context here, just use p directly.",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cce07b6d_7cd25f31",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "This function will close the context when connectivity to afrouter is lost.  However, because it\u0027s in a loop, a new ctx is needed on each iteration. \n\nProposal: Change the method back to returning ctx, pass probe directly \u0026 assign it to the context internally.",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53f8ad45_c72d441a",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "Must use ctx returned from ConnectionActiveContext()",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e01b4b3_e83c0693",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "Must use ctx returned from ConnectionActiveContext()",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ebef7de_fa811035",
+        "filename": "go.mod",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "junit-report and gocover-cobereta should not be imported and versioned with the rest of the project.",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8ac2bfd_3a449a42",
+        "filename": "internal/pkg/afrouter/arproxy.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "Is it cleaner to pass in the probe directly?  Adding one parameter for probe vs adding one parameter for ctx with an indirect access to a probe.",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "174d5785_cf586d0b",
+        "filename": "internal/pkg/afrouter/config.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "Put in ApiConfig instead?",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e80b573_e89b7539",
+        "filename": "internal/pkg/afrouterd/misc.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-06T13:16:47Z",
+      "side": 1,
+      "message": "Must create \u0026 return new context every time it\u0027s called.",
+      "revId": "70a7af18d128fbbeea5795b0501ad68b1220380b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
