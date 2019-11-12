@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0f49760_6df01a2e",
+        "filename": "arouter.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Use \"localhost\" instead of \"\", since this is typically used for local dev.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da1c72a3_5c20b65f",
+        "filename": "cmd/arouter/arouter.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "No need to create a context here.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ce64e08_90f68c4d",
+        "filename": "cmd/arouter/arouter.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Remove commented code.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29172924_182c6eab",
+        "filename": "cmd/arouter/arouter.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Pulling the probe out of ctx is unnecessary.  Just use existing p from line 80.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6efd9996_66415549",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Unnecessary ctx.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3676d83_1ba952a5",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Unused comment.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7bb5c270_4ca61b7f",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Line 83-85 unnecessary.  RegisterService() can be called on p from line 77.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67c1983d_5913d81a",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Use context.Background() instead of ctx here.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5da95139_6e3d8813",
+        "filename": "cmd/arouterd/arouterd.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "No need to check p!\u003dnil.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35800c18_6409d22b",
+        "filename": "go.mod",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "junit-report and gocover-cobereta should not be imported and versioned with the rest of the project.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aa3c064_bfa6401c",
+        "filename": "internal/pkg/afrouter/arproxy.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "No need to verify p!\u003dnil.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ad4ef34_b766b139",
+        "filename": "internal/pkg/afrouterd/discoveryMonitor.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Add `defer updateStatusFromContext(...)`",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99447b92_7591b6ef",
+        "filename": "internal/pkg/afrouterd/misc.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-12T15:23:24Z",
+      "side": 1,
+      "message": "Move before disconnected() to avoid an unlikely service status race condition.",
+      "revId": "9ae4bfdfbada9af171eba612dd427fc1287db511",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
