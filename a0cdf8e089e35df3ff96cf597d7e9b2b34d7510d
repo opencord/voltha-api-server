@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7d8cf9b_467bc877",
+        "filename": "go.mod",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000107
+      },
+      "writtenOn": "2019-11-14T16:03:30Z",
+      "side": 1,
+      "message": "Final problem.  I\u0027m not sure why these are being pulled in, but go-junit-report and gocover-cobertura should not be included here.",
+      "revId": "a0cdf8e089e35df3ff96cf597d7e9b2b34d7510d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
