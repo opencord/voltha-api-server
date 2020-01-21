@@ -95,8 +95,8 @@ endif
 local-lib-go:
 ifdef LOCAL_LIB_GO
 	rm -rf vendor/github.com/opencord/voltha-lib-go
-	mkdir -p vendor/github.com/opencord/voltha-lib-go/v2/pkg
-	cp -r ${LOCAL_LIB_GO}/pkg/* vendor/github.com/opencord/voltha-lib-go/v2/pkg/
+	mkdir -p vendor/github.com/opencord/voltha-lib-go/v3/pkg
+	cp -r ${LOCAL_LIB_GO}/pkg/* vendor/github.com/opencord/voltha-lib-go/v3/pkg/
 endif
 
 ## Docker targets

@@ -21,14 +21,14 @@ import (
 	"flag"
 	"fmt"
 	"github.com/opencord/voltha-api-server/internal/pkg/afrouterd"
-	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
-	"github.com/opencord/voltha-lib-go/v2/pkg/version"
+	"github.com/opencord/voltha-lib-go/v3/pkg/probe"
+	"github.com/opencord/voltha-lib-go/v3/pkg/version"
 	"math"
 	"os"
 	"path"
 
-	"github.com/opencord/voltha-lib-go/v2/pkg/log"
-	pb "github.com/opencord/voltha-protos/v2/go/afrouter"
+	"github.com/opencord/voltha-lib-go/v3/pkg/log"
+	pb "github.com/opencord/voltha-protos/v3/go/afrouter"
 )
 
 var (

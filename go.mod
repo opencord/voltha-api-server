@@ -6,11 +6,12 @@ require (
 	github.com/golang/protobuf v1.3.2
 	github.com/google/uuid v1.1.1
 	github.com/googleapis/gnostic v0.2.0 // indirect
+	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/imdario/mergo v0.3.7 // indirect
 	github.com/onsi/ginkgo v1.10.2 // indirect
 	github.com/onsi/gomega v1.7.0 // indirect
-	github.com/opencord/voltha-lib-go/v2 v2.2.16
-	github.com/opencord/voltha-protos/v2 v2.0.1
+	github.com/opencord/voltha-lib-go/v3 v3.0.0
+	github.com/opencord/voltha-protos/v3 v3.0.0
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/stretchr/testify v1.4.0
 	golang.org/x/net v0.0.0-20190930134127-c5a3c61f89f3

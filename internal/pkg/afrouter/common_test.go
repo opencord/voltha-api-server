@@ -22,11 +22,11 @@ package afrouter
  */
 
 import (
-	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v3/pkg/log"
 )
 
 const (
-	TEST_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/v2/voltha.pb"
+	TEST_PROTOFILE = "../../../vendor/github.com/opencord/voltha-protos/v3/voltha.pb"
 
 	/*
 	 * This sets the LogLevel of the Voltha logger. It's pinned to FatalLevel here, as we

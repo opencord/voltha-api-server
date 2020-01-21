@@ -19,9 +19,9 @@ package afrouter
 import (
 	"errors"
 	"fmt"
-	"github.com/opencord/voltha-lib-go/v2/pkg/log"
-	pb "github.com/opencord/voltha-protos/v2/go/afrouter"
-	common_pb "github.com/opencord/voltha-protos/v2/go/common"
+	"github.com/opencord/voltha-lib-go/v3/pkg/log"
+	pb "github.com/opencord/voltha-protos/v3/go/afrouter"
+	common_pb "github.com/opencord/voltha-protos/v3/go/common"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"net"
@@ -244,7 +244,7 @@ func (aa ArouterApi) GetLogLevels(ctx context.Context, in *common_pb.LoggingComp
 		logLevel := &common_pb.Logging{
 			ComponentName: in.ComponentName,
 			PackageName:   packageName,
-			Level:         common_pb.LogLevel_LogLevel(level)}
+			Level:         common_pb.LogLevel_Types(level)}
 		logLevels.Items = append(logLevels.Items, logLevel)
 	}
 
@@ -252,7 +252,7 @@ func (aa ArouterApi) GetLogLevels(ctx context.Context, in *common_pb.LoggingComp
 	logLevel := &common_pb.Logging{
 		ComponentName: in.ComponentName,
 		PackageName:   "default",
-		Level:         common_pb.LogLevel_LogLevel(log.GetDefaultLogLevel())}
+		Level:         common_pb.LogLevel_Types(log.GetDefaultLogLevel())}
 	logLevels.Items = append(logLevels.Items, logLevel)
 
 	return logLevels, nil

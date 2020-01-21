@@ -18,7 +18,7 @@ package afrouter
 
 import (
 	"fmt"
-	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
+	"github.com/opencord/voltha-lib-go/v3/pkg/probe"
 	"github.com/phayes/freeport"
 	"github.com/stretchr/testify/assert"
 	"testing"

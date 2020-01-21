@@ -21,8 +21,8 @@ package afrouter
 // for the affinity router.
 
 import (
-	"github.com/opencord/voltha-lib-go/v2/pkg/log"
-	"github.com/opencord/voltha-lib-go/v2/pkg/probe"
+	"github.com/opencord/voltha-lib-go/v3/pkg/log"
+	"github.com/opencord/voltha-lib-go/v3/pkg/probe"
 )
 
 // String names for display in error messages.

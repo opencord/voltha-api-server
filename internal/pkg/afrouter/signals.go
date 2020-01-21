@@ -21,7 +21,7 @@
 package afrouter
 
 import (
-	"github.com/opencord/voltha-lib-go/v2/pkg/log"
+	"github.com/opencord/voltha-lib-go/v3/pkg/log"
 	"os"
 	"os/signal"
 	"syscall"
