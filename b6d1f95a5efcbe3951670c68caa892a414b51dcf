@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e536df31_e5aea4a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000948
+      },
+      "writtenOn": "2023-11-02T21:14:18Z",
+      "side": 1,
+      "message": "Cosmetic README edit to note the repo is deprecated.",
+      "revId": "b6d1f95a5efcbe3951670c68caa892a414b51dcf",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    }
+  ]
+}
