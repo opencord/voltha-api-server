@@ -13,7 +13,7 @@ require (
 	github.com/opencord/voltha-protos/v2 v2.0.1
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/stretchr/testify v1.4.0
-	golang.org/x/net v0.0.0-20190930134127-c5a3c61f89f3
+	golang.org/x/net v0.7.0
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	google.golang.org/grpc v1.24.0
 	gopkg.in/inf.v0 v0.9.1 // indirect
